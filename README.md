@@ -27,7 +27,7 @@ Test Client has three configuration files: ```settings.properties```, ```clients
   <tr>
     <td>proxy.url</td>
     <td>-</td>
-    <td>Security server URL/IP, e.g. http://193.166.25.53/</td>
+    <td>Security server URL/IP, e.g. http://123.456.78.9/</td>
   </tr>
   <tr>
     <td>thread.executor.count</td>
@@ -63,3 +63,20 @@ Test Client has three configuration files: ```settings.properties```, ```clients
     <td>Maximum time in milliseconds that a single thread runs. A single thread runs until thread.request.count OR thread.request.maxtime is reached.</td>
   </tr>
 </table>
+
+**Example**
+
+```
+# Security server URL/IP
+proxy.url=http://123.456.78.9/
+# Number of thread executors
+thread.executor.count=10
+# Number of threads
+thread.count=10
+# Thread sleep time in milliseconds between requests
+thread.sleep=200
+# Number of requests per thread
+thread.request.count=0
+# Maximum time in milliseconds that a single thread runs
+thread.request.maxtime=0 
+```
