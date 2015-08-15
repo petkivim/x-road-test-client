@@ -2,7 +2,7 @@
 
 X-Road Test Client is a testing tool and load generator for X-Road v6.4 and above. The implementation is based on [XRd4J](https://github.com/petkivim/xrd4j) library. 
 
-By default Test Client calls GetRandom service of [X-Road Adapter Example](https://github.com/petkivim/x-road-adapter-example) project according to given parameters that include: message body size, message attachment size, number of client threads, interval between messages, number of messages to be sent per client and maximum run time per client. A random String is used as a payload and the same String is used in all the requests in a single execution. However, unique message ID is automatically generated for each request.   
+By default Test Client calls ```helloService``` service of [X-Road Adapter Example](https://github.com/petkivim/x-road-adapter-example) project according to given parameters that include: message body size, message attachment size, number of client threads, interval between messages, number of messages to be sent per client and maximum run time per client. A random String is used as a payload and the same String is used in all the requests in a single execution. However, unique message ID is automatically generated for each request.   
 
 ### Customization
 
@@ -140,7 +140,7 @@ thread.request.maxtime=0
 # instance | memberClass | member | subsystem | msg body size (character cnt) | msg attachment size (character cnt)
 client=FI-DEV63|GOV|0245437-2|TestClient|50000|0
 # instance | memberClass | member | subsystem | service | version | namespace
-service=FI-DEV63|GOV|0245437-2|TestService|getRandom|v1|http://test.x-road.fi/producer
+service=FI-DEV63|GOV|0245437-2|TestService|helloService|v1|http://test.x-road.fi/producer
 ```
 
 ### log4j.xml
