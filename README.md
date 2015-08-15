@@ -18,6 +18,10 @@ The installation instructions for X-Road Adapter Example can be found at:
 
 https://github.com/petkivim/x-road-adapter-example#installation
 
+### Try It Out
+
+If you already have access to [X-Road Adapter Example]'s ```helloService``` service the fastest and easiest way to try out the application is to [download](https://github.com/petkivim/x-road-test-client/releases/download/x-road-test-client-0.0.3/x-road-test-client-0.0.3.jar`) the executable jar version (```x-road-test-client-0.0.3.jar```), copy ```settings.properties``` and ```clients.properties``` configuration files in the same directory with the jar file, modify the default configuration and finally run the jar: ```java -jar x-road-test-client-0.0.3.jar```.
+
 ### Configuration
 
 Test Client has three configuration files: ```settings.properties```, ```clients.properties``` and ```log4j.xml```.
