@@ -10,7 +10,6 @@ import com.pkrete.xrd4j.tools.test_client.util.PropertiesLoader;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import javax.xml.soap.SOAPMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

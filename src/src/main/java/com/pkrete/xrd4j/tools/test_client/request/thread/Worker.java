@@ -41,25 +41,35 @@ public class Worker implements Runnable {
     @Override
     public void run() {
         logger.debug("Thread #{} starting.", this.number);
+        // Init variables for counting requests and time
         int requestCount = 0;
         long timeCount = 0;
         long startTime = System.currentTimeMillis();
+        // Keep on sending messages until the conditions are met
         while (requestCount < this.maxRequestCount || timeCount < this.maxTime) {
+            // Init variables for logging
             long throughput = 0;
             boolean sendSuccess = false;
             boolean receiveSuccess = true;
+            // Get unique ID for the message
             String reqId = MessageHelper.generateId();
             try {
+                // Set message ID
                 message.setId(reqId);
+                // Serialize message to SOAP
                 SOAPMessage request = this.serializer.serialize(message);
                 logger.debug("Thread #{} sending message #{}, ID : \"{}\".", this.number, requestCount, reqId);
                 long msgStartTime = System.currentTimeMillis();
+                // Create new client for sending the message
                 SOAPClient client = new SOAPClientImpl();
+                // Send the message
                 client.send(request, url);
                 sendSuccess = true;
+                // Calculate message throughput time
                 throughput = System.currentTimeMillis() - msgStartTime;
                 logger.debug("Thread #{} received response for message #{}, ID : \"{}\".", this.number, requestCount, reqId);
                 logger.info("Message \"{}\" processing time {} ms", reqId, throughput);
+                // Sleep...
                 if (this.sleep > 0) {
                     logger.debug("Thread #{} sleeping {} ms.", this.number, this.sleep);
                     Thread.sleep(this.sleep);

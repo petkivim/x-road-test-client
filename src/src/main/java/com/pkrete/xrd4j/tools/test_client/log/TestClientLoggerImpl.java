@@ -18,9 +18,9 @@ public class TestClientLoggerImpl implements TestClientLogger {
      * @param threadId id of the thread that processed the message
      * @param msgId unique id of the message
      * @param throughput message throughput in milliseconds
-     * @param successSend true if the message was sent succesfully; otherwise
+     * @param successSend true if the message was sent successfully; otherwise
      * false
-     * @param successReceive true if the response was received succesfully;
+     * @param successReceive true if the response was received successfully;
      * otherwise false
      */
     public void log(int threadId, String msgId, long throughput, boolean successSend, boolean successReceive) {

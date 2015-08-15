@@ -50,7 +50,7 @@ public class PropertiesLoader {
     /**
      * Loads properties from a file with the given filename. First the file
      * searched from the same directory with the jar file and then from
-     * classpath.
+     * class path.
      * @param fileName name of the file to be searched
      * @return properties loaded from the file
      */

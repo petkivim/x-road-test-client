@@ -52,13 +52,20 @@ public class RequestFactory {
             producer.setNamespaceUrl(serviceArr[6]);
             producer.setNamespacePrefix("ns");
 
+            // Create a new service request which request data type is String
             ServiceRequest<String> request = new ServiceRequest<String>(consumer, producer, MessageHelper.generateId());
+            // Set user id
             request.setUserId("tester");
+            // Set request data - (String) data variable contains a random String
             request.setRequestData(data);
 
+            // clientArr[5] holds the attachment size property - add a random String attachment if the value is greater than
             if (!clientArr[5].equals("0")) {
+                // Generate a random String
                 String attachmentData = ApplicationHelper.getRandomString(Integer.parseInt(clientArr[5]));
+                // Set attachment value
                 ((HelloServiceRequestSerializer) serializer).setAttachment("<attachmentData>" + attachmentData + "</attachmentData>");
+                // Set attachment's content-type
                 ((HelloServiceRequestSerializer) serializer).setAttachmentContentType("text/xml");
             }
             return request;
