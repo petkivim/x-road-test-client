@@ -16,6 +16,8 @@ https://github.com/petkivim/x-road-adapter-example#installation
 
 Test Client has three configuration files: ```settings.properties```, ```clients.properties``` and ```log4j.xml```.
 
+By default Test Client uses the configuration files that are packaged inside the jar file. It's possible to override the default configuration copying one or all the configuration files (```settings.properties```, ```clients.properties```, ```log4j.xml```) and placing them in the same directory with the jar file. When the jar file is run it first looks for the configuration files from the working directory, and for the configuration files that can can not be found it uses the default configuration. For example, it's possible to override ```settings.properties``` and ```clients.properties``` placing modified versions in the same directory with the jar file, but use the default configuration for logging.
+
 #### settings.properties
 
 <table>
