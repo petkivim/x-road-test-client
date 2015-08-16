@@ -1,23 +1,23 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.pkrete.xrd4j.tools</groupId>
     <artifactId>x-road-test-client</artifactId>
-	<name>X-Road Test Client</name>
+    <name>X-Road Test Client</name>
     <version>0.0.4-SNAPSHOT</version>
-	<inceptionYear>2015</inceptionYear>
+    <inceptionYear>2015</inceptionYear>
     <description>
         X-Road Test Client is a testing tool and load generator for X-Road v6.4 and above. 
-		Test Client calls GetRandom service of X-Road Adapter Example project according to 
-		given parameters that include: message body size, message attachment size, number 
-		of client threads, interval between messages, number of messages to be sent per 
-		client and maximum run time per client.
+        Test Client calls GetRandom service of X-Road Adapter Example project according to 
+        given parameters that include: message body size, message attachment size, number 
+        of client threads, interval between messages, number of messages to be sent per 
+        client and maximum run time per client.
     </description>	
     <properties>
         <slf4j.version>1.7.7</slf4j.version>
         <log4j.version>1.2.16</log4j.version>
-		<xrd4j.version>0.0.6</xrd4j.version>
+        <xrd4j.version>0.0.6</xrd4j.version>
         <junit.version>3.8.1</junit.version>
         <jdk.version>1.7</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -61,12 +61,17 @@
             <scope>test</scope>
         </dependency>		
     </dependencies>
-	<licenses>
+    <licenses>
         <license>
             <name>MIT License</name>
             <url>http://www.opensource.org/licenses/mit-license.php</url>
         </license>
     </licenses>
+    <scm>
+        <connection>scm:git:git@github.com:petkivim/x-road-test-client.git</connection>
+        <developerConnection>scm:git:git@github.com:petkivim/x-road-test-client.git</developerConnection>
+        <url>git@github.com:petkivim/x-road-test-client.git</url>
+    </scm>	
     <developers>
         <developer>
             <id>petkivim</id>
@@ -83,7 +88,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-				<version>2.5</version>
+                <version>2.5</version>
                 <configuration>
                     <archive>
                         <manifest>
