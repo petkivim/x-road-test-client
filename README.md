@@ -2,7 +2,7 @@
 
 X-Road Test Client is a testing tool and load generator for X-Road v6.4 and above. The implementation is based on [XRd4J](https://github.com/petkivim/xrd4j) library. 
 
-By default Test Client calls ```helloService``` service of [X-Road Adapter Example](https://github.com/petkivim/x-road-adapter-example) project according to given parameters that include: message body size, message attachment size, number of client threads, interval between messages, number of messages to be sent per client and maximum run time per client. A random String is used as a payload and the same String is used in all the requests in a single execution. However, unique message ID is automatically generated for each request.   
+By default Test Client calls ```testService``` service of [X-Road Test Service](https://github.com/petkivim/x-road-test-service) project according to given parameters that include: message body size, message attachment size, response body size, response attachment size, number of client threads, interval between messages, number of messages to be sent per client and maximum run time per client. A random String is used as a payload and the same String is used in all the requests in a single execution. However, unique message ID is automatically generated for each request.   
 
 ### Customization
 
@@ -10,17 +10,17 @@ Test Client can be customized and used for calling other services besides X-Road
 
 ### Prerequisites
 
-Before using the Test Client [X-Road Adapter Example](https://github.com/petkivim/x-road-adapter-example) application must be installed on a server and configured as a X-Road service. X-Road Example Adapter can be downloaded from GitHub:
+Before using the Test Client [X-Road Test Service](https://github.com/petkivim/x-road-test-service) application must be installed on a server and configured as a X-Road service. X-Road Test Service can be downloaded from GitHub:
 
-https://github.com/petkivim/x-road-adapter-example/releases/tag/example-adapter-0.0.3
+https://github.com/petkivim/x-road-test-service/releases
 
-The installation instructions for X-Road Adapter Example can be found at:
+The installation instructions for X-Road Test Service can be found at:
 
-https://github.com/petkivim/x-road-adapter-example#installation
+https://github.com/petkivim/x-road-test-service#installation
 
 ### Try It Out
 
-If you already have access to [X-Road Adapter Example](https://github.com/petkivim/x-road-adapter-example)'s ```helloService``` service the fastest and easiest way to try out the application is to [download](https://github.com/petkivim/x-road-test-client/releases/download/x-road-test-client-0.0.3/x-road-test-client-0.0.3.jar`) the executable jar version (```x-road-test-client-0.0.3.jar```), copy ```settings.properties``` and ```clients.properties``` configuration files in the same directory with the jar file, modify the default configuration and finally run the jar: ```java -jar x-road-test-client-0.0.3.jar```.
+If you already have access to [X-Road Test Service](https://github.com/petkivim/x-road-test-service)'s ```testService``` service the fastest and easiest way to try out the application is to [download](https://github.com/petkivim/x-road-test-client/releases/download/x-road-test-client-0.0.3/x-road-test-client-0.0.3.jar`) the executable jar version (```x-road-test-client-0.0.3.jar```), copy ```settings.properties``` and ```clients.properties``` configuration files in the same directory with the jar file, modify the default configuration and finally run the jar: ```java -jar x-road-test-client-0.0.3.jar```.
 
 ### Configuration
 
@@ -102,9 +102,10 @@ thread.request.maxtime=0
     <th>memberClass</th>
     <th>member</th>
     <th>subsystem</th>
-    <th>body size (character count)</th>
-    <th>attachment size (character count</th>
-    <th></th>
+    <th>request body size (character count)</th>
+    <th>request attachment size (character count</th>
+    <th>response body size (character count)</th>
+    <th>response attachment size (character count</th>    
   </tr>
   <tr>
     <td>client</td>
@@ -112,9 +113,10 @@ thread.request.maxtime=0
     <td>member class</td>
     <td>member code</td>
     <td>subsystem code</td>
-    <td>message body character count</td>
-    <td>message attachment character count</td>
-    <td></td>
+    <td>request body character count</td>
+    <td>request attachment character count</td>
+    <td>response body character count</td>
+    <td>response attachment character count</td>
   </tr>
   <tr>
     <th>Property</th>
@@ -141,8 +143,8 @@ thread.request.maxtime=0
 **Example**
 
 ```
-# instance | memberClass | member | subsystem | msg body size (character cnt) | msg attachment size (character cnt)
-client=FI-DEV63|GOV|0245437-2|TestClient|50000|0
+# instance | memberClass | member | subsystem | msg body size (character cnt) | msg attachment size (character cnt) | response body size (character cnt) | response attachment size (character cnt)
+client=FI-DEV63|GOV|0245437-2|TestClient|50000|0|9000|0
 # instance | memberClass | member | subsystem | service | version | namespace
 service=FI-DEV63|GOV|0245437-2|TestService|helloService|v1|http://test.x-road.fi/producer
 ```
@@ -154,16 +156,17 @@ By default all the output generated by Test Client is printed on console. The de
 * thread id - id number of the thread that produced the output
 * message id - id of the message
 * throughput - message processing time in milliseconds (processing time = time between sending the request and receiving the response)
+* processingTime - processing time that the X-Road Test Service uses for generating response body and response attachment in milliseconds
 * successSend - was the message succesfully sent
 * successReceive - does the response include SOAP fault
 
 **Example logging in console**
 
 ```
-10.07.2015 08:19:52 INFO  TestClientLoggerImpl : 1    5f47de76-40f0-49c5-b786-6efed802a80c    218    true    true
-10.07.2015 08:19:52 INFO  TestClientLoggerImpl : 9    131ed36f-cde9-4eb4-8338-9cc4cc46f654    283    true    true
-10.07.2015 08:19:52 INFO  TestClientLoggerImpl : 0    ce04fc65-c0b5-43b6-9027-15261cedde7d    272    true    true
-10.07.2015 08:19:52 INFO  TestClientLoggerImpl : 1    81b61f2d-6018-4ba5-a92a-8db1f2a60d54    221    true    true 
+10.07.2015 08:19:52 INFO  TestClientLoggerImpl : 1    5f47de76-40f0-49c5-b786-6efed802a80c    218    199    true    true
+10.07.2015 08:19:52 INFO  TestClientLoggerImpl : 9    131ed36f-cde9-4eb4-8338-9cc4cc46f654    283    233    true    true
+10.07.2015 08:19:52 INFO  TestClientLoggerImpl : 0    ce04fc65-c0b5-43b6-9027-15261cedde7d    272    255    true    true
+10.07.2015 08:19:52 INFO  TestClientLoggerImpl : 1    81b61f2d-6018-4ba5-a92a-8db1f2a60d54    221    199    true    true 
 ```
 
 **Default configuration**
@@ -190,7 +193,7 @@ By default all the output generated by Test Client is printed on console. The de
         <appender-ref ref="console"/>
     </logger>
     <logger name="com.pkrete.xrd4j.client" additivity="false">
-        <level value="WARN"/>
+        <level value="ERROR"/>
         <appender-ref ref="console"/>
     </logger>
     <logger name="java.lang.Runnable" additivity="false">
