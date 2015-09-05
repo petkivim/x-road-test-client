@@ -1,5 +1,9 @@
 package com.pkrete.xrd4j.tools.test_client.util;
 
+import com.pkrete.xrd4j.common.exception.XRd4JException;
+import com.pkrete.xrd4j.common.message.ServiceRequest;
+import com.pkrete.xrd4j.common.util.MessageHelper;
+import com.pkrete.xrd4j.tools.test_client.request.TestServiceRequest;
 import java.io.File;
 import java.util.Random;
 import org.slf4j.Logger;
@@ -14,12 +18,13 @@ import org.apache.log4j.xml.DOMConfigurator;
 public class ApplicationHelper {
 
     private static final Logger logger = LoggerFactory.getLogger(ApplicationHelper.class);
-    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖabcdefghijklmnopqrstuvwxyzåäö0123456789 ";
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ";
     private static String jarDir;
 
     /**
-     * Returns the absolute path of the jar file containing the application.
-     * The path is returned with a trailing slash.
+     * Returns the absolute path of the jar file containing the application. The
+     * path is returned with a trailing slash.
+     *
      * @return absolute path of the current working directory
      */
     public static String getJarPath() {
@@ -66,6 +71,7 @@ public class ApplicationHelper {
 
     /**
      * Returns a random string of given length.
+     *
      * @param length length of the string
      * @return random string
      */
@@ -78,5 +84,26 @@ public class ApplicationHelper {
         }
         logger.debug("String generated.");
         return sb.toString();
+    }
+
+    /**
+     * Copies the given ServiceRequest.
+     * @param request ServiceRequest to be copied
+     * @return new ServiceRequest
+     */
+    public static ServiceRequest clone(ServiceRequest<TestServiceRequest> request) {
+        try {
+            // Create a new service request which request data type is String
+            ServiceRequest<TestServiceRequest> newRequest = new ServiceRequest<TestServiceRequest>(request.getConsumer(), request.getProducer(), request.getId());
+            // Set user id
+            newRequest.setUserId(request.getUserId());
+            // Set request data
+            newRequest.setRequestData(request.getRequestData());
+            // Return new request
+            return newRequest;
+        } catch (XRd4JException e) {
+            logger.debug(e.getMessage());
+        }
+        return null;
     }
 }

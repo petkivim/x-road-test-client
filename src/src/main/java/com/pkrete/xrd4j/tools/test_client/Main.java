@@ -1,10 +1,11 @@
 package com.pkrete.xrd4j.tools.test_client;
 
+import com.pkrete.xrd4j.client.serializer.ServiceRequestSerializer;
 import com.pkrete.xrd4j.common.message.ServiceRequest;
 import com.pkrete.xrd4j.common.util.MessageHelper;
 import com.pkrete.xrd4j.tools.test_client.request.RequestFactory;
 import com.pkrete.xrd4j.tools.test_client.request.thread.Worker;
-import com.pkrete.xrd4j.tools.test_client.serializer.HelloServiceRequestSerializer;
+import com.pkrete.xrd4j.tools.test_client.serializer.TestServiceRequestSerializer;
 import com.pkrete.xrd4j.tools.test_client.util.ApplicationHelper;
 import com.pkrete.xrd4j.tools.test_client.util.PropertiesLoader;
 import java.util.Properties;
@@ -47,18 +48,27 @@ public class Main {
         logger.info("Max request count per thread : {}", maxRequestCount);
         logger.info("Max run time per thread : {}", maxTime);
 
-        HelloServiceRequestSerializer serializer = new HelloServiceRequestSerializer();
-        ServiceRequest request = RequestFactory.getRequest(clients, serializer);
+        ServiceRequestSerializer serializer = new TestServiceRequestSerializer();
+        ServiceRequest request = RequestFactory.getRequest(clients);
 
+        if(request == null) {
+            logger.error("Configuring the client failed. Exit...");
+            return;
+        }
+        
+        logger.info("Start the test.");
         ExecutorService executor = Executors.newFixedThreadPool(threadExecutorCount);
         for (int i = 0; i < threadCount; i++) {
             logger.debug("Starting thread #{}.", i);
+            // Clone the request - all the threads update the id, which causes
+            // concurrecny issues if the object is not cloned
+            request = ApplicationHelper.clone(request);
             Runnable worker = new Worker(request, url, sleep, maxRequestCount, maxTime, i, serializer);
             executor.execute(worker);
         }
         executor.shutdown();
         while (!executor.isTerminated()) {
         }
-
+        logger.info("The test was succesfully finished.");
     }
 }

@@ -8,5 +8,5 @@ package com.pkrete.xrd4j.tools.test_client.log;
  */
 public interface TestClientLogger {
 
-    void log(int threadId, String msgId, long throughput, boolean successSend, boolean successReceive);
+    void log(int threadId, String msgId, long throughput, String serviceProcessingTime, boolean successSend, boolean successReceive);
 }

@@ -19,7 +19,7 @@
         <appender-ref ref="console"/>
     </logger>
     <logger name="com.pkrete.xrd4j.client" additivity="false">
-        <level value="WARN"/>
+        <level value="ERROR"/>
         <appender-ref ref="console"/>
     </logger>
     <logger name="java.lang.Runnable" additivity="false">

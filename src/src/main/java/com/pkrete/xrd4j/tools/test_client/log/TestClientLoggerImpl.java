@@ -18,12 +18,13 @@ public class TestClientLoggerImpl implements TestClientLogger {
      * @param threadId id of the thread that processed the message
      * @param msgId unique id of the message
      * @param throughput message throughput in milliseconds
+     * @param serviceProcessingTime time that the service used for generating the response data in milliseconds
      * @param successSend true if the message was sent successfully; otherwise
      * false
      * @param successReceive true if the response was received successfully;
      * otherwise false
      */
-    public void log(int threadId, String msgId, long throughput, boolean successSend, boolean successReceive) {
-        logger.info("{}\t{}\t{}\t{}\t{}", threadId, msgId, throughput, successSend, successReceive);
+    public void log(int threadId, String msgId, long throughput, String serviceProcessingTime, boolean successSend, boolean successReceive) {
+        logger.info("{}\t{}\t{}\t{}\t{}\t{}", threadId, msgId, throughput, serviceProcessingTime, successSend, successReceive);
     }
 }

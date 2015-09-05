@@ -2,11 +2,15 @@ package com.pkrete.xrd4j.tools.test_client.request.thread;
 
 import com.pkrete.xrd4j.client.SOAPClient;
 import com.pkrete.xrd4j.client.SOAPClientImpl;
+import com.pkrete.xrd4j.client.deserializer.ServiceResponseDeserializer;
 import com.pkrete.xrd4j.client.serializer.ServiceRequestSerializer;
 import com.pkrete.xrd4j.common.message.ServiceRequest;
+import com.pkrete.xrd4j.common.message.ServiceResponse;
 import com.pkrete.xrd4j.common.util.MessageHelper;
+import com.pkrete.xrd4j.tools.test_client.deserializer.TestServiceResponseDeserializer;
 import com.pkrete.xrd4j.tools.test_client.log.TestClientLogger;
 import com.pkrete.xrd4j.tools.test_client.log.TestClientLoggerImpl;
+import com.pkrete.xrd4j.tools.test_client.request.TestServiceRequest;
 import javax.xml.soap.SOAPMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +55,7 @@ public class Worker implements Runnable {
             long throughput = 0;
             boolean sendSuccess = false;
             boolean receiveSuccess = true;
+            String serviceProcessingTime = "0";
             // Get unique ID for the message
             String reqId = MessageHelper.generateId();
             try {
@@ -63,11 +68,22 @@ public class Worker implements Runnable {
                 // Create new client for sending the message
                 SOAPClient client = new SOAPClientImpl();
                 // Send the message
-                client.send(request, url);
+                SOAPMessage soapResponse = client.send(request, url);
                 sendSuccess = true;
                 // Calculate message throughput time
                 throughput = System.currentTimeMillis() - msgStartTime;
-                logger.debug("Thread #{} received response for message #{}, ID : \"{}\".", this.number, requestCount, reqId);
+                // Deserialize the response
+                ServiceResponseDeserializer deserializer = new TestServiceResponseDeserializer();
+                ServiceResponse<TestServiceRequest, String> serviceResponse = deserializer.deserialize(soapResponse);
+                // Check SOAP response for SOAP Fault
+                if (serviceResponse.hasError()) {
+                    receiveSuccess = false;
+                    logger.error("Thread #{} received response containing SOAP Fault for message #{}, ID : \"{}\".", this.number, requestCount, reqId);
+                    logger.error("Fault code : \"{}\".", serviceResponse.getErrorMessage().getFaultCode());
+                } else {
+                    serviceProcessingTime = serviceResponse.getResponseData();
+                    logger.debug("Thread #{} received response for message #{}, ID : \"{}\".", this.number, requestCount, reqId);
+                }
                 logger.info("Message \"{}\" processing time {} ms", reqId, throughput);
                 // Sleep...
                 if (this.sleep > 0) {
@@ -79,7 +95,7 @@ public class Worker implements Runnable {
                 logger.error("Thread #{} sending message #{} failed, ID : \"{}\".", this.number, requestCount, reqId);
                 logger.error(ex.getMessage());
             }
-            this.resulstLogger.log(this.number, reqId, throughput, sendSuccess, receiveSuccess);
+            this.resulstLogger.log(this.number, reqId, throughput, serviceProcessingTime, sendSuccess, receiveSuccess);
             timeCount = System.currentTimeMillis() - startTime;
             requestCount++;
         }
