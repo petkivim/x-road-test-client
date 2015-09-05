@@ -98,55 +98,55 @@ thread.request.maxtime=0
 <table>
   <tr>
     <th>Property</th>
-    <th>instance</th>
-    <th>memberClass</th>
-    <th>member</th>
-    <th>subsystem</th>
-    <th>request body size (character count)</th>
-    <th>request attachment size (character count</th>
-    <th>response body size (character count)</th>
-    <th>response attachment size (character count</th>    
+    <th>Descrition</th>   
   </tr>
   <tr>
     <td>client</td>
-    <td>instance identifier</td>
-    <td>member class</td>
-    <td>member code</td>
-    <td>subsystem code</td>
-    <td>request body character count</td>
-    <td>request attachment character count</td>
-    <td>response body character count</td>
-    <td>response attachment character count</td>
+    <td>Identifier of the X-Road client that initiates the service call: instance.memberClass.memberId.subsystem.</td>
   </tr>
   <tr>
-    <th>Property</th>
-    <th>instance</th>
-    <th>memberClass</th>
-    <th>member</th>
-    <th>subsystem</th>
-    <th>service</th>
-    <th>version</th>
-    <th>namespace</th>
-  </tr>    
+    <td>client.requestBodySize</td>
+    <td>Request body character count.</td>
+  </tr>
   <tr>
+    <td>client.requestAttachmentSize</td>
+    <td>Request attachment character count.</td>
+  </tr>
+  <tr>	
+    <td>client.responseBodySize</td>
+    <td>Response body character count´.</td>
+  </tr>
+  <tr>	
+    <td>client.responseAttachmentSize</td>
+    <td>Response attachment character count. </td>
+  </tr>
+  <tr>	
     <td>service</td>
-    <td>instance identifier</td>
-    <td>member class</td>
-    <td>member code</td>
-    <td>subsystem code</td>
-    <td>service code</td>
-    <td>service version</td>
-    <td>namespace of the service</td>
+    <td>Identifier of the X-Road service that's called : instance.memberClass.memberId.subsystem.service.version.</td>
   </tr>
+  <tr>	
+    <td>service.namespace</td>
+    <td>Namespace of the service to be called.</td>
+  </tr>  
 </table>
 
 **Example**
 
 ```
-# instance | memberClass | member | subsystem | msg body size (character cnt) | msg attachment size (character cnt) | response body size (character cnt) | response attachment size (character cnt)
-client=FI-DEV63|GOV|0245437-2|TestClient|50000|0|9000|0
-# instance | memberClass | member | subsystem | service | version | namespace
-service=FI-DEV63|GOV|0245437-2|TestService|helloService|v1|http://test.x-road.fi/producer
+# Client ID: instance.memberClass.member.subsystem
+client=FI-DEV.GOV.0245437-2.TestClient
+# Request body size (character cnt)
+client.requestBodySize=2000
+# Request attachment size (character cnt)
+client.requestAttachmentSize=0
+# Response body size (character cnt)
+client.responseBodySize=4000
+# Response attachment size (character cnt)
+client.responseAttachmentSize=0
+# Service ID: instance.memberClass.member.subsystem.service.version
+service=FI-DEV.GOV.0245437-2.TestService.testService.v1
+# Service namespace
+service.namespace=http://test.x-road.fi/producer
 ```
 
 ### log4j.xml
