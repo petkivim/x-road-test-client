@@ -6,12 +6,13 @@ import com.pkrete.xrd4j.common.member.ProducerMember;
 import com.pkrete.xrd4j.common.message.ServiceRequest;
 import com.pkrete.xrd4j.common.util.MessageHelper;
 import com.pkrete.xrd4j.tools.test_client.util.ApplicationHelper;
+import com.pkrete.xrd4j.tools.test_client.util.Constants;
 import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This class generates clients based on the config file.
+ * This class generates clients based on the configuration file.
  *
  * @author Petteri Kivimäki
  */
@@ -22,62 +23,57 @@ public class RequestFactory {
     public static ServiceRequest getRequest(Properties clients) {
         logger.info("Starting to generate new request.");
         logger.debug("Parse configuration.");
-        String clientStr = (String) clients.get("client");
-        String[] clientArr = clientStr.split("\\|");
-        String serviceStr = (String) clients.get("service");
-        String[] serviceArr = serviceStr.split("\\|");
+        String clientStr = (String) clients.get(Constants.CLIENT);
+        String serviceStr = (String) clients.get(Constants.SERVICE);
 
-        if (clientArr.length != 8) {
-            logger.error("Invalid client configuration! The number of configuration items does not match ({} != 8).", clientArr.length);
+        // Create client
+        ConsumerMember consumer = ApplicationHelper.parseConsumerMember(clientStr);
+        if (consumer == null) {
+            logger.error("Invalid client configuration! Invalid value : \"{}\".", clientStr);
             return null;
         }
-        if (serviceArr.length != 7) {
-            logger.error("Invalid service configuration! The number of configuration items does not match ({} != 7).", serviceArr.length);
+        logger.debug("Client : \"{}\".", consumer.toString());
+
+        // Create service
+        ProducerMember producer = ApplicationHelper.parseProducerMember(serviceStr);
+        if (producer == null) {
+            logger.error("Invalid client configuration! Invalid value : \"{}\".", serviceStr);
             return null;
         }
+        logger.debug("Service : \"{}\".", producer.toString());
+
         try {
             logger.debug("Configure client.");
-            String instance = clientArr[0];
-            String memberClass = clientArr[1];
-            String memberCode = clientArr[2];
-            String subsystem = clientArr[3];
-            String data = ApplicationHelper.getRandomString(Integer.parseInt(clientArr[4]));
-            String attachmentData = ApplicationHelper.getRandomString(Integer.parseInt(clientArr[5]));
-            String responseBodySize = clientArr[6];
-            String responseAttachmentSize = clientArr[7];
+            // Get configuration
+            String requestBodySize = (String) clients.get(Constants.CLIENT_REQ_BODY_SIZE);
+            String requestAttachmentSize = (String) clients.get(Constants.CLIENT_REQ_ATTACH_SIZE);
+            String responseBodySize = (String) clients.get(Constants.CLIENT_RESPONSE_BODY_SIZE);
+            String responseAttachmentSize = (String) clients.get(Constants.CLIENT_RESPONSE_ATTACH_SIZE);
 
-            logger.debug("Request body size : {}.", clientArr[4]);
-            logger.debug("Request attachment size : {}.", clientArr[5]);
-            logger.debug("Response body size : {}.", clientArr[6]);
-            logger.debug("Response attachment size : {}.", clientArr[7]);
+            logger.debug("Request body size : {}.", requestBodySize);
+            logger.debug("Request attachment size : {}.", requestAttachmentSize);
+            logger.debug("Response body size : {}.", responseBodySize);
+            logger.debug("Response attachment size : {}.", responseAttachmentSize);
 
-            ConsumerMember consumer = null;
-            if (subsystem.isEmpty()) {
-                consumer = new ConsumerMember(instance, memberClass, memberCode);
-            } else {
-                consumer = new ConsumerMember(instance, memberClass, memberCode, subsystem);
-            }
-
-            logger.debug("Client : \"{}\".", consumer.toString());
+            // Generate request data
+            String data = ApplicationHelper.getRandomString(Integer.parseInt(requestBodySize));
+            String attachmentData = ApplicationHelper.getRandomString(Integer.parseInt(requestAttachmentSize));
 
             logger.debug("Configure service.");
-            instance = serviceArr[0];
-            memberClass = serviceArr[1];
-            memberCode = serviceArr[2];
-            subsystem = serviceArr[3];
-            String serviceCode = serviceArr[4];
-            String serviceVersion = serviceArr[5];
-
-            ProducerMember producer = new ProducerMember(instance, memberClass, memberCode, subsystem, serviceCode, serviceVersion);
-            logger.debug("Service : \"{}\".", producer.toString());
-            producer.setNamespaceUrl(serviceArr[6]);
+            // Get configuration
+            String namespace = (String) clients.get(Constants.SERVICE_NAMESPACE);
+            // Set values
+            producer.setNamespaceUrl(namespace);
+            logger.debug("Namespace : \"{}\".", namespace);
             producer.setNamespacePrefix("ns");
+            logger.debug("Namespace prefix : \"ns\".");
 
             logger.debug("Generate request.");
             // Create a new service request which request data type is String
             ServiceRequest<TestServiceRequest> request = new ServiceRequest<TestServiceRequest>(consumer, producer, MessageHelper.generateId());
             // Set user id
             request.setUserId("tester");
+            logger.debug("User id : \"tester\".");
             // Creare new TestServiceRequest
             TestServiceRequest testServiceRequest = new TestServiceRequest(data, attachmentData, responseBodySize, responseAttachmentSize);
             // Set request data
