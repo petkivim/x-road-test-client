@@ -102,7 +102,7 @@ thread.request.maxtime=0
   </tr>
   <tr>
     <td>client</td>
-    <td>Identifier of the X-Road client that initiates the service call: instance.memberClass.memberId.subsystem.</td>
+    <td>Identifier of the X-Road client that initiates the service call: instance.memberClass.memberId.subsystem</td>
   </tr>
   <tr>
     <td>client.requestBodySize</td>
@@ -122,7 +122,7 @@ thread.request.maxtime=0
   </tr>
   <tr>	
     <td>service</td>
-    <td>Identifier of the X-Road service that's called : instance.memberClass.memberId.subsystem.service.version.</td>
+    <td>Identifier of the X-Road service that's called : instance.memberClass.memberId.subsystem.service.version</td>
   </tr>
   <tr>	
     <td>service.namespace</td>
