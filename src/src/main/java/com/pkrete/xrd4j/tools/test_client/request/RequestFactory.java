@@ -4,6 +4,7 @@ import com.pkrete.xrd4j.common.exception.XRd4JException;
 import com.pkrete.xrd4j.common.member.ConsumerMember;
 import com.pkrete.xrd4j.common.member.ProducerMember;
 import com.pkrete.xrd4j.common.message.ServiceRequest;
+import com.pkrete.xrd4j.common.util.ConfigurationHelper;
 import com.pkrete.xrd4j.common.util.MessageHelper;
 import com.pkrete.xrd4j.tools.test_client.util.ApplicationHelper;
 import com.pkrete.xrd4j.tools.test_client.util.Constants;
@@ -27,7 +28,7 @@ public class RequestFactory {
         String serviceStr = (String) clients.get(Constants.SERVICE);
 
         // Create client
-        ConsumerMember consumer = ApplicationHelper.parseConsumerMember(clientStr);
+        ConsumerMember consumer = ConfigurationHelper.parseConsumerMember(clientStr);
         if (consumer == null) {
             logger.error("Invalid client configuration! Invalid value : \"{}\".", clientStr);
             return null;
@@ -35,7 +36,7 @@ public class RequestFactory {
         logger.debug("Client : \"{}\".", consumer.toString());
 
         // Create service
-        ProducerMember producer = ApplicationHelper.parseProducerMember(serviceStr);
+        ProducerMember producer = ConfigurationHelper.parseProducerMember(serviceStr);
         if (producer == null) {
             logger.error("Invalid client configuration! Invalid value : \"{}\".", serviceStr);
             return null;
