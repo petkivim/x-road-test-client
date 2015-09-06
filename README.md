@@ -20,7 +20,7 @@ https://github.com/petkivim/x-road-test-service#installation
 
 ### Try It Out
 
-If you already have access to [X-Road Test Service](https://github.com/petkivim/x-road-test-service)'s ```testService``` service the fastest and easiest way to try out the application is to [download](https://github.com/petkivim/x-road-test-client/releases/download/x-road-test-client-0.0.4/x-road-test-client-0.0.4.jar`) the executable jar version (```x-road-test-client-0.0.4.jar```), copy ```settings.properties``` and ```clients.properties``` configuration files in the same directory with the jar file, modify the default configuration and finally run the jar: ```java -jar x-road-test-client-0.0.4.jar```.
+If you already have access to [X-Road Test Service](https://github.com/petkivim/x-road-test-service)'s ```testService``` service the fastest and easiest way to try out the application is to [download](https://github.com/petkivim/x-road-test-client/releases/download/v0.0.4/x-road-test-client-0.0.4.jar) the executable jar version (```x-road-test-client-0.0.4.jar```), copy ```settings.properties``` and ```clients.properties``` configuration files in the same directory with the jar file, modify the default configuration and finally run the jar: ```java -jar x-road-test-client-0.0.4.jar```.
 
 ### Configuration
 
