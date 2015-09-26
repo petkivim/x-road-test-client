@@ -8,6 +8,7 @@ import com.pkrete.xrd4j.tools.test_client.request.thread.Worker;
 import com.pkrete.xrd4j.tools.test_client.serializer.TestServiceRequestSerializer;
 import com.pkrete.xrd4j.tools.test_client.util.ApplicationHelper;
 import com.pkrete.xrd4j.tools.test_client.util.PropertiesLoader;
+import com.pkrete.xrd4j.tools.test_client.util.StatisticsCollector;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -51,12 +52,13 @@ public class Main {
         ServiceRequestSerializer serializer = new TestServiceRequestSerializer();
         ServiceRequest request = RequestFactory.getRequest(clients);
 
-        if(request == null) {
+        if (request == null) {
             logger.error("Configuring the client failed. Exit...");
             return;
         }
-        
+
         logger.info("Start the test.");
+        long startTime = System.currentTimeMillis();
         ExecutorService executor = Executors.newFixedThreadPool(threadExecutorCount);
         for (int i = 0; i < threadCount; i++) {
             logger.debug("Starting thread #{}.", i);
@@ -69,6 +71,16 @@ public class Main {
         executor.shutdown();
         while (!executor.isTerminated()) {
         }
+        long endTime = System.currentTimeMillis() - startTime;
         logger.info("The test was succesfully finished.");
+        logger.info("##################################");
+        logger.info("RESULTS:");
+        logger.info("Test duration: {} s", (int) ((endTime / 1000) % 60));
+        logger.info("Total number of queries: {}", StatisticsCollector.getStatisticsCollector().getResults().size());
+        logger.info("Successful queries #: {}", StatisticsCollector.getStatisticsCollector().getSuccessCount());
+        logger.info("Failed queries #: {}", StatisticsCollector.getStatisticsCollector().getFailureCount());
+        logger.info("Fastest query: {} ms", StatisticsCollector.getStatisticsCollector().getMinThroughput());
+        logger.info("Slowest query: {} ms", StatisticsCollector.getStatisticsCollector().getMaxThroughput());
+        logger.info("Median: {} ms", StatisticsCollector.getStatisticsCollector().getMedian());
     }
 }

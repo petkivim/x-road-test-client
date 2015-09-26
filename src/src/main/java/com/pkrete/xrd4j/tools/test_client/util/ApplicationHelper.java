@@ -108,4 +108,19 @@ public class ApplicationHelper {
         }
         return null;
     }
+
+    /**
+     * Parses the string argument as a signed decimal integer. If parsing of the
+     * string fails, zero is returned.
+     *
+     * @param source a String containing the integer representation to be parsed
+     * @return the integer value represented by the argument in decimal
+     */
+    public static int strToInt(String source) {
+        try {
+            return Integer.parseInt(source);
+        } catch (NumberFormatException nfe) {
+            return 0;
+        }
+    }
 }

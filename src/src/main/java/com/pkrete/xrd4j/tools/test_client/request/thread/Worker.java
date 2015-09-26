@@ -11,6 +11,8 @@ import com.pkrete.xrd4j.tools.test_client.deserializer.TestServiceResponseDeseri
 import com.pkrete.xrd4j.tools.test_client.log.TestClientLogger;
 import com.pkrete.xrd4j.tools.test_client.log.TestClientLoggerImpl;
 import com.pkrete.xrd4j.tools.test_client.request.TestServiceRequest;
+import com.pkrete.xrd4j.tools.test_client.util.ApplicationHelper;
+import com.pkrete.xrd4j.tools.test_client.util.StatisticsCollector;
 import javax.xml.soap.SOAPMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -96,7 +98,19 @@ public class Worker implements Runnable {
                 logger.error(ex.getMessage());
             }
             this.resulstLogger.log(this.number, reqId, throughput, serviceProcessingTime, sendSuccess, receiveSuccess);
+            // Incerease time count
             timeCount = System.currentTimeMillis() - startTime;
+            // Collect statistics
+            long totalTime = throughput - ApplicationHelper.strToInt(serviceProcessingTime);
+            StatisticsCollector.getStatisticsCollector().addResult(totalTime);
+            StatisticsCollector.getStatisticsCollector().setMinThroughput(throughput);
+            StatisticsCollector.getStatisticsCollector().setMaxThroughput(throughput);
+            if (receiveSuccess) {
+                StatisticsCollector.getStatisticsCollector().increseSuccessCount();
+            } else {
+                StatisticsCollector.getStatisticsCollector().increaseFailureCount();
+            }
+            // Update request counter
             requestCount++;
         }
         logger.debug("Thread #{} done!", this.number);
