@@ -75,11 +75,11 @@ public class Main {
         executor.shutdown();
         while (!executor.isTerminated()) {
         }
-        long endTime = System.currentTimeMillis() - startTime;
+        long duration = System.currentTimeMillis() - startTime;
         logger.info("The test was succesfully finished.");
         logger.info("##################################");
         logger.info("RESULTS:");
-        logger.info("Test duration: {} s", (int) ((endTime / 1000) % 60));
+        logger.info("Test duration: {}", ApplicationHelper.millisecondsToString(duration));
         logger.info("Total number of queries: {}", StatisticsCollector.getStatisticsCollector().getResults().size());
         logger.info("Successful queries #: {}", StatisticsCollector.getStatisticsCollector().getSuccessCount());
         logger.info("Failed queries #: {}", StatisticsCollector.getStatisticsCollector().getFailureCount());

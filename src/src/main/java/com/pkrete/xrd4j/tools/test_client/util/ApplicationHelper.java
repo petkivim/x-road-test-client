@@ -123,4 +123,17 @@ public class ApplicationHelper {
             return 0;
         }
     }
+
+    /**
+     * Converts the given milliseconds to string.
+     *
+     * @param milliseconds time to be converted
+     * @return string
+     */
+    public static String millisecondsToString(long milliseconds) {
+        int seconds = (int) (milliseconds / 1000) % 60;
+        int minutes = (int) ((milliseconds / (1000 * 60)) % 60);
+        int hours = (int) ((milliseconds / (1000 * 60 * 60)) % 24);
+        return hours + " h " + minutes + " min "  + seconds + " s";
+    }
 }
