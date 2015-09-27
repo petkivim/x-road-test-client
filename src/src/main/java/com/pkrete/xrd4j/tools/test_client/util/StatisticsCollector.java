@@ -14,17 +14,52 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class StatisticsCollector {
 
+    /**
+     * Variable for the fastest request throughput.
+     */
     private long minThroughput;
+    /**
+     * Variable for the slowest request throughput.
+     */
     private long maxThroughput;
+    /**
+     * Variable that counts the number of successful requests.
+     */
     private int successCount;
+    /**
+     * Variable that counts the number of failed requests.
+     */
     private int failureCount;
+    /**
+     * Variable for the throughput time of all the requests.
+     */
     private final BlockingQueue<Long> results;
+    /**
+     * Lock object for minThroughput.
+     */
     private final Object minLock = new Object();
+    /**
+     * Lock object for maxThroughput.
+     */
     private final Object maxLock = new Object();
+    /**
+     * Lock object for successCount.
+     */
     private final Object successLock = new Object();
+    /**
+     * Lock object for failureCount.
+     */
     private final Object failureLock = new Object();
+    /**
+     * Reference to the singleton object.
+     */
     private static StatisticsCollector ref;
 
+    /**
+     * Returns a reference to the singleton object of this class.
+     *
+     * @return reference to the singleton object of this class
+     */
     public static StatisticsCollector getStatisticsCollector() {
         if (ref == null) {
             ref = new StatisticsCollector();

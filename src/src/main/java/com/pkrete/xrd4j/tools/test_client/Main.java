@@ -33,8 +33,10 @@ public class Main {
     }
 
     public void start(String[] args) {
+        // Read properties from files
         Properties settings = PropertiesLoader.loadGeneralSettings();
         Properties clients = PropertiesLoader.loadClientSettings();
+        // Get settings for the test run
         int threadExecutorCount = MessageHelper.strToInt(settings.getProperty("thread.executor.count"));
         int threadCount = MessageHelper.strToInt(settings.getProperty("thread.count"));
         String url = settings.getProperty("proxy.url");
@@ -49,7 +51,9 @@ public class Main {
         logger.info("Max request count per thread : {}", maxRequestCount);
         logger.info("Max run time per thread : {}", maxTime);
 
+        // Create serializer for requests
         ServiceRequestSerializer serializer = new TestServiceRequestSerializer();
+        // Generate the request object
         ServiceRequest request = RequestFactory.getRequest(clients);
 
         if (request == null) {

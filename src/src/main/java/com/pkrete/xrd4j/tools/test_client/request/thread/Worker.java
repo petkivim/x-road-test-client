@@ -24,14 +24,14 @@ import org.slf4j.LoggerFactory;
 public class Worker implements Runnable {
 
     private static final Logger logger = LoggerFactory.getLogger(Runnable.class);
-    private ServiceRequest message;
-    private String url;
-    private int sleep;
-    private int maxRequestCount;
-    private int maxTime;
-    private int number;
-    private ServiceRequestSerializer serializer;
-    private TestClientLogger resulstLogger;
+    private final ServiceRequest message;
+    private final String url;
+    private final int sleep;
+    private final int maxRequestCount;
+    private final int maxTime;
+    private final int number;
+    private final ServiceRequestSerializer serializer;
+    private final TestClientLogger resulstLogger;
 
     public Worker(ServiceRequest message, String url, int sleep, int maxRequestCount, int maxTime, int number, ServiceRequestSerializer serializer) {
         this.message = message;
