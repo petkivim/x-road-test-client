@@ -1,12 +1,10 @@
 package com.pkrete.xrd4j.tools.test_client.util;
 
 import com.pkrete.xrd4j.common.exception.XRd4JException;
-import com.pkrete.xrd4j.common.member.ConsumerMember;
-import com.pkrete.xrd4j.common.member.ProducerMember;
+import org.apache.commons.lang3.RandomStringUtils;
 import com.pkrete.xrd4j.common.message.ServiceRequest;
 import com.pkrete.xrd4j.tools.test_client.request.TestServiceRequest;
 import java.io.File;
-import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.apache.log4j.xml.DOMConfigurator;
@@ -19,7 +17,6 @@ import org.apache.log4j.xml.DOMConfigurator;
 public class ApplicationHelper {
 
     private static final Logger logger = LoggerFactory.getLogger(ApplicationHelper.class);
-    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ";
     private static String jarDir;
 
     /**
@@ -78,13 +75,9 @@ public class ApplicationHelper {
      */
     public static String getRandomString(int length) {
         logger.debug("Generate random string of {} charaters.", length);
-        Random random = new Random();
-        StringBuilder sb = new StringBuilder();
-        while (sb.toString().getBytes().length < length) {
-            sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
-        }
-        logger.debug("String generated.");
-        return sb.toString();
+        String s = RandomStringUtils.randomAlphanumeric(length);
+        logger.debug("String generated");
+        return s;
     }
 
     /**
@@ -134,6 +127,6 @@ public class ApplicationHelper {
         int seconds = (int) (milliseconds / 1000) % 60;
         int minutes = (int) ((milliseconds / (1000 * 60)) % 60);
         int hours = (int) ((milliseconds / (1000 * 60 * 60)) % 24);
-        return hours + " h " + minutes + " min "  + seconds + " s";
+        return hours + " h " + minutes + " min " + seconds + " s";
     }
 }
