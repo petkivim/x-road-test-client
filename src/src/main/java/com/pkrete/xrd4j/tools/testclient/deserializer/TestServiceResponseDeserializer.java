@@ -1,7 +1,7 @@
-package com.pkrete.xrd4j.tools.test_client.deserializer;
+package com.pkrete.xrd4j.tools.testclient.deserializer;
 
 import com.pkrete.xrd4j.client.deserializer.AbstractResponseDeserializer;
-import com.pkrete.xrd4j.tools.test_client.request.TestServiceRequest;
+import com.pkrete.xrd4j.tools.testclient.request.TestServiceRequest;
 import javax.xml.soap.Node;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;

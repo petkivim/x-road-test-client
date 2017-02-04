@@ -1,14 +1,14 @@
-package com.pkrete.xrd4j.tools.test_client;
+package com.pkrete.xrd4j.tools.testclient;
 
 import com.pkrete.xrd4j.client.serializer.ServiceRequestSerializer;
 import com.pkrete.xrd4j.common.message.ServiceRequest;
 import com.pkrete.xrd4j.common.util.MessageHelper;
-import com.pkrete.xrd4j.tools.test_client.request.RequestFactory;
-import com.pkrete.xrd4j.tools.test_client.request.thread.Worker;
-import com.pkrete.xrd4j.tools.test_client.serializer.TestServiceRequestSerializer;
-import com.pkrete.xrd4j.tools.test_client.util.ApplicationHelper;
-import com.pkrete.xrd4j.tools.test_client.util.PropertiesLoader;
-import com.pkrete.xrd4j.tools.test_client.util.StatisticsCollector;
+import com.pkrete.xrd4j.tools.testclient.request.RequestFactory;
+import com.pkrete.xrd4j.tools.testclient.request.thread.Worker;
+import com.pkrete.xrd4j.tools.testclient.serializer.TestServiceRequestSerializer;
+import com.pkrete.xrd4j.tools.testclient.util.ApplicationHelper;
+import com.pkrete.xrd4j.tools.testclient.util.PropertiesLoader;
+import com.pkrete.xrd4j.tools.testclient.util.StatisticsCollector;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

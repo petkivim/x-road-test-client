@@ -1,4 +1,4 @@
-package com.pkrete.xrd4j.tools.test_client.log;
+package com.pkrete.xrd4j.tools.testclient.log;
 
 /**
  * This class defines an interface for logging the data related to individual

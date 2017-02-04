@@ -1,4 +1,4 @@
-package com.pkrete.xrd4j.tools.test_client.util;
+package com.pkrete.xrd4j.tools.testclient.util;
 
 /**
  * This class defines all the constants used in this application.
