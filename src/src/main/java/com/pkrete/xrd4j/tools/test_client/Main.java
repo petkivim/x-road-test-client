@@ -12,6 +12,7 @@ import com.pkrete.xrd4j.tools.test_client.util.StatisticsCollector;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -72,8 +73,25 @@ public class Main {
             Runnable worker = new Worker(request, url, sleep, maxRequestCount, maxTime, i, serializer);
             executor.execute(worker);
         }
+        // The shutdown() method doesn’t cause an immediate destruction 
+        // of the ExecutorService. It will make the ExecutorService stop 
+        // accepting new tasks and shut down after all running threads 
+        // finish their current work.
         executor.shutdown();
-        while (!executor.isTerminated()) {
+
+        try {
+            // Blocks until all tasks have completed execution after a shutdown 
+            // request, or the timeout occurs, or the current thread is 
+            // interrupted, whichever happens first. Returns true if this 
+            // executor is terminated and false if the timeout elapsed 
+            // before termination.
+            while (!executor.awaitTermination(1, TimeUnit.MINUTES)) {
+                // Wait for executor to be terminated
+                logger.trace("Waiting for ExecutorService to be terminated.");
+            }
+        } catch (InterruptedException ex) {
+            logger.error(ex.getMessage(), ex);
+            Thread.currentThread().interrupt();
         }
         long duration = System.currentTimeMillis() - startTime;
         logger.info("The test was succesfully finished.");
