@@ -21,6 +21,14 @@ public class RequestFactory {
 
     private static final Logger logger = LoggerFactory.getLogger(RequestFactory.class);
 
+    /**
+     * Constructs and initializes a new RequestFactory object. Should never be
+     * used.
+     */
+    private RequestFactory() {
+
+    }
+
     public static ServiceRequest getRequest(Properties clients) {
         logger.info("Starting to generate new request.");
         logger.debug("Parse configuration.");
@@ -71,7 +79,7 @@ public class RequestFactory {
 
             logger.debug("Generate request.");
             // Create a new service request which request data type is String
-            ServiceRequest<TestServiceRequest> request = new ServiceRequest<TestServiceRequest>(consumer, producer, MessageHelper.generateId());
+            ServiceRequest<TestServiceRequest> request = new ServiceRequest<>(consumer, producer, MessageHelper.generateId());
             // Set user id
             request.setUserId("tester");
             logger.debug("User id : \"tester\".");

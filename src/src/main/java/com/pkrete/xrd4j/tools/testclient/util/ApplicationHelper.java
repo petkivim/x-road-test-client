@@ -97,7 +97,7 @@ public class ApplicationHelper {
     public static ServiceRequest clone(ServiceRequest<TestServiceRequest> request) {
         try {
             // Create a new service request which request data type is String
-            ServiceRequest<TestServiceRequest> newRequest = new ServiceRequest<TestServiceRequest>(request.getConsumer(), request.getProducer(), request.getId());
+            ServiceRequest<TestServiceRequest> newRequest = new ServiceRequest<>(request.getConsumer(), request.getProducer(), request.getId());
             // Set user id
             newRequest.setUserId(request.getUserId());
             // Set request data

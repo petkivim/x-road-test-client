@@ -30,10 +30,10 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        new Main().start(args);
+        new Main().start();
     }
 
-    public void start(String[] args) {
+    public void start() {
         // Read properties from files
         Properties settings = PropertiesLoader.loadGeneralSettings();
         Properties clients = PropertiesLoader.loadClientSettings();

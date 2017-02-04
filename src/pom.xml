@@ -25,6 +25,7 @@
         <junit.version>3.8.1</junit.version>
         <jdk.version>1.7</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
     </properties>
     <dependencies>
         <dependency>
@@ -86,7 +87,7 @@
     <developers>
         <developer>
             <id>petkivim</id>
-            <name>Petteri Kivim�ki</name>
+            <name>Petteri Kivimäki</name>
             <roles>
                 <role>architect</role>
                 <role>developer</role>
@@ -96,6 +97,16 @@
     </developers>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>

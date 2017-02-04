@@ -17,4 +17,10 @@ public class Constants {
     public static final String CLIENT_RESPONSE_ATTACH_SIZE = "client.responseAttachmentSize";
     public static final String SERVICE = "service";
     public static final String SERVICE_NAMESPACE = "service.namespace";
+
+    /**
+     * Constructs and initializes a new Constants object. Should never be used.
+     */
+    private Constants() {
+    }
 }

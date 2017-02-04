@@ -25,12 +25,6 @@ public class TestServiceRequest {
     private String requestAttachment;
 
     /**
-     * Constructs and initializes a new TestServiceRequest.
-     */
-    public TestServiceRequest() {
-    }
-
-    /**
      * Constructs and initializes a new TestServiceRequest with the given
      * values.
      *

@@ -56,6 +56,17 @@ public class StatisticsCollector {
     private static StatisticsCollector ref;
 
     /**
+     * Constructs and initializes a new StatisticsCollector.
+     */
+    private StatisticsCollector() {
+        this.minThroughput = 0;
+        this.maxThroughput = 0;
+        this.successCount = 0;
+        this.failureCount = 0;
+        this.results = new LinkedBlockingQueue<>();
+    }
+
+    /**
      * Returns a reference to the singleton object of this class.
      *
      * @return reference to the singleton object of this class
@@ -65,17 +76,6 @@ public class StatisticsCollector {
             ref = new StatisticsCollector();
         }
         return ref;
-    }
-
-    /**
-     * Constructs and initializes a new StatisticsCollector.
-     */
-    private StatisticsCollector() {
-        this.minThroughput = 0;
-        this.maxThroughput = 0;
-        this.successCount = 0;
-        this.failureCount = 0;
-        this.results = new LinkedBlockingQueue<Long>();
     }
 
     /**

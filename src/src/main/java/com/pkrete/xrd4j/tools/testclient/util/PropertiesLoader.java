@@ -18,8 +18,15 @@ public class PropertiesLoader {
     private static Properties clientSettings;
 
     /**
-     * Loads general settings file and returns properties found from
-     * it.
+     * Constructs and initializes a new PropertiesLoader object. Should never be
+     * used.
+     */
+    private PropertiesLoader() {
+    }
+
+    /**
+     * Loads general settings file and returns properties found from it.
+     *
      * @return general settings properties
      */
     public static Properties loadGeneralSettings() {
@@ -33,8 +40,8 @@ public class PropertiesLoader {
     }
 
     /**
-     * Loads client settings file and returns properties found from
-     * it.
+     * Loads client settings file and returns properties found from it.
+     *
      * @return client settings properties
      */
     public static Properties loadClientSettings() {
@@ -49,8 +56,9 @@ public class PropertiesLoader {
 
     /**
      * Loads properties from a file with the given filename. First the file
-     * searched from the same directory with the jar file and then from
-     * class path.
+     * searched from the same directory with the jar file and then from class
+     * path.
+     *
      * @param fileName name of the file to be searched
      * @return properties loaded from the file
      */
