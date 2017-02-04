@@ -20,6 +20,14 @@ public class ApplicationHelper {
     private static String jarDir;
 
     /**
+     * Constructs and initializes a new ApplicationHelper object. Should never
+     * be used.
+     */
+    private ApplicationHelper() {
+
+    }
+
+    /**
      * Returns the absolute path of the jar file containing the application. The
      * path is returned with a trailing slash.
      *
@@ -32,7 +40,7 @@ public class ApplicationHelper {
             return jarDir;
         }
         int limit = 5;
-        if (System.getProperty("os.name").substring(0, 3).equals("Win")) {
+        if ("Win".equals(System.getProperty("os.name").substring(0, 3))) {
             limit = 6;
         }
         String temp = ApplicationHelper.class.getProtectionDomain().getCodeSource().getLocation().toString().substring(limit);
@@ -44,7 +52,7 @@ public class ApplicationHelper {
             logger.info("Jar directory loaded : \"{}\".", jarDir);
             return jarDir;
         } catch (Exception ex) {
-            logger.error(ex.getMessage());
+            logger.error(ex.getMessage(), ex);
             return null;
         }
     }
@@ -96,8 +104,8 @@ public class ApplicationHelper {
             newRequest.setRequestData(request.getRequestData());
             // Return new request
             return newRequest;
-        } catch (XRd4JException e) {
-            logger.debug(e.getMessage());
+        } catch (XRd4JException ex) {
+            logger.error(ex.getMessage(), ex);
         }
         return null;
     }

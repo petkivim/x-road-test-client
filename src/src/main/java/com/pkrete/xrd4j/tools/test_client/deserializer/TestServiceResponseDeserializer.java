@@ -25,7 +25,7 @@ public class TestServiceResponseDeserializer extends AbstractResponseDeserialize
         // Look for the "processingTime" node, ignore all the other elements
         for (int i = 0; i < responseNode.getChildNodes().getLength(); i++) {
             if (responseNode.getChildNodes().item(i).getNodeType() == Node.ELEMENT_NODE
-                    && responseNode.getChildNodes().item(i).getLocalName().equals("processingTime")) {
+                    && "processingTime".equals(responseNode.getChildNodes().item(i).getLocalName())) {
                 return responseNode.getChildNodes().item(i).getTextContent();
             }
         }

@@ -56,7 +56,7 @@ public class PropertiesLoader {
      */
     private static Properties load(String fileName) {
         logger.debug("Load settings.");
-        Properties settings = null;
+        Properties settings;
         String path = ApplicationHelper.getJarPath() + fileName;
         if (new File(path).exists()) {
             settings = PropertiesUtil.getInstance().load(path, false);

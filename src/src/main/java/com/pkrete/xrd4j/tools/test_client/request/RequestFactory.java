@@ -82,6 +82,7 @@ public class RequestFactory {
             logger.info("The request was succesfully generated.");
             return request;
         } catch (XRd4JException e) {
+            logger.error(e.getMessage(), e);
         }
         logger.error("Generating the request failed. Null is returned.");
         return null;

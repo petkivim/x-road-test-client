@@ -95,7 +95,7 @@ public class Worker implements Runnable {
             } catch (Exception ex) {
                 receiveSuccess = false;
                 logger.error("Thread #{} sending message #{} failed, ID : \"{}\".", this.number, requestCount, reqId);
-                logger.error(ex.getMessage());
+                logger.error(ex.getMessage(), ex);
             }
             this.resulstLogger.log(this.number, reqId, throughput, serviceProcessingTime, sendSuccess, receiveSuccess);
             // Incerease time count
