@@ -114,7 +114,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.pkrete.xrd4j.tools.test_client.Main</mainClass>
+                            <mainClass>com.pkrete.xrd4j.tools.testclient.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
