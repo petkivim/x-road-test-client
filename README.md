@@ -2,25 +2,25 @@
 
 X-Road Test Client is a testing tool and load generator for X-Road v6.4 and above. The implementation is based on [XRd4J](https://github.com/petkivim/xrd4j) library. 
 
-By default Test Client calls ```testService``` service of [X-Road Test Service](https://github.com/petkivim/x-road-test-service) project according to given parameters that include: message body size, message attachment size, response body size, response attachment size, number of client threads, interval between messages, number of messages to be sent per client and maximum run time per client. A random String is used as a payload and the same String is used in all the requests in a single execution. However, unique message ID is automatically generated for each request.   
+By default Test Client calls ```testService``` service of [X-Road Test Service](https://github.com/nordic-institute/X-Road-test-service) project according to given parameters that include: message body size, message attachment size, response body size, response attachment size, number of client threads, interval between messages, number of messages to be sent per client and maximum run time per client. A random String is used as a payload and the same String is used in all the requests in a single execution. However, unique message ID is automatically generated for each request.   
 
 ### Customization
 
-Test Client can be customized and used for calling other services besides X-Road Adapter Example as well. Test Client can be used as a base or starting point when starting to build a testing tool for X-Road services. [Instructions for customizing](https://github.com/petkivim/x-road-test-client/wiki/Customizing-the-Test-Client) Test Client can be found in wiki.
+Test Client can be customized and used for calling other services besides X-Road Test Service as well. Test Client can be used as a base or starting point when starting to build a testing tool for X-Road services. [Instructions for customizing](https://github.com/petkivim/x-road-test-client/wiki/Customizing-the-Test-Client) Test Client can be found in wiki.
 
 ### Prerequisites
 
-Before using the Test Client [X-Road Test Service](https://github.com/petkivim/x-road-test-service) application must be installed on a server and configured as a X-Road service. X-Road Test Service can be downloaded from GitHub:
+Before using the Test Client [X-Road Test Service](https://github.com/nordic-institute/X-Road-test-service) application must be installed on a server and configured as a X-Road service. X-Road Test Service can be downloaded from GitHub:
 
-https://github.com/petkivim/x-road-test-service/releases
+https://github.com/nordic-institute/X-Road-test-service/releases
 
 The installation instructions for X-Road Test Service can be found at:
 
-https://github.com/petkivim/x-road-test-service#installation
+https://github.com/nordic-institute/X-Road-test-service#installation
 
 ### Try It Out
 
-If you already have access to [X-Road Test Service](https://github.com/petkivim/x-road-test-service)'s ```testService``` service the fastest and easiest way to try out the application is to [download](https://github.com/petkivim/x-road-test-client/releases/download/v0.0.6/x-road-test-client-0.0.6.jar) the executable jar version (```x-road-test-client-0.0.6.jar```), copy ```settings.properties``` and ```clients.properties``` configuration files in the same directory with the jar file, modify the default configuration (Security Server or X-Road Test Service URL/IP: ```settings.properties``` => ```proxy.url```) and finally run the jar: ```java -jar x-road-test-client-0.0.6.jar```.
+If you already have access to [X-Road Test Service](https://github.com/nordic-institute/X-Road-test-service)'s ```testService``` service the fastest and easiest way to try out the application is to [download](https://github.com/petkivim/x-road-test-client/releases/download/v0.0.6/x-road-test-client-0.0.6.jar) the executable jar version (```x-road-test-client-0.0.6.jar```), copy ```settings.properties``` and ```clients.properties``` configuration files in the same directory with the jar file, modify the default configuration (Security Server or X-Road Test Service URL/IP: ```settings.properties``` => ```proxy.url```) and finally run the jar: ```java -jar x-road-test-client-0.0.6.jar```.
 
 ### Configuration
 
@@ -134,7 +134,7 @@ thread.request.maxtime=0
 
 ```
 # Client ID: instance.memberClass.member.subsystem
-client=FI-DEV.GOV.0245437-2.TestClient
+client=NIIS-TEST.GOV.123456-7.TestClient
 # Request body size (character cnt)
 client.requestBodySize=2000
 # Request attachment size (character cnt)
@@ -144,9 +144,9 @@ client.responseBodySize=4000
 # Response attachment size (character cnt)
 client.responseAttachmentSize=0
 # Service ID: instance.memberClass.member.subsystem.service.version
-service=FI-DEV.GOV.0245437-2.TestService.testService.v1
+service=NIIS-TEST.GOV.0245437-2.TestService.testService.v1
 # Service namespace
-service.namespace=http://test.x-road.fi/producer
+service.namespace=http://test.x-road.global/producer
 ```
 
 ### log4j.xml
