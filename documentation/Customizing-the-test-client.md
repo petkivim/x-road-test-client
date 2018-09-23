@@ -1,3 +1,5 @@
+## Customizing the Test Client
+
 This document describes how Test Client can be used for calling other services than [X-Road Test Service](https://github.com/nordic-institute/X-Road-test-service). The implementation of Test Client is based on [XRd4J](https://github.com/nordic-institute/xrd4j) library.
 
 The default implementation calls X-Road Test Service's ```testService``` service using a random String, which size can be configured, as a parameter. The String can be placed in the message body and/or message attachment, and the same String is used in all the requests in a single execution. ```testService``` takes as parameters the size of the response body and the size of the response attachment part. The size defines the number of characters in the response. Calling some other service requires changes in the following classes:
