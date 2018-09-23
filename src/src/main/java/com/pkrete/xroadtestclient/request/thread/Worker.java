@@ -1,4 +1,4 @@
-package com.pkrete.xrd4j.tools.testclient.request.thread;
+package com.pkrete.xroadtestclient.request.thread;
 
 import org.niis.xrd4j.client.SOAPClient;
 import org.niis.xrd4j.client.SOAPClientImpl;
@@ -7,12 +7,12 @@ import org.niis.xrd4j.client.serializer.ServiceRequestSerializer;
 import org.niis.xrd4j.common.message.ServiceRequest;
 import org.niis.xrd4j.common.message.ServiceResponse;
 import org.niis.xrd4j.common.util.MessageHelper;
-import com.pkrete.xrd4j.tools.testclient.deserializer.TestServiceResponseDeserializer;
-import com.pkrete.xrd4j.tools.testclient.log.TestClientLogger;
-import com.pkrete.xrd4j.tools.testclient.log.TestClientLoggerImpl;
-import com.pkrete.xrd4j.tools.testclient.request.TestServiceRequest;
-import com.pkrete.xrd4j.tools.testclient.util.ApplicationHelper;
-import com.pkrete.xrd4j.tools.testclient.util.StatisticsCollector;
+import com.pkrete.xroadtestclient.deserializer.TestServiceResponseDeserializer;
+import com.pkrete.xroadtestclient.log.TestClientLogger;
+import com.pkrete.xroadtestclient.log.TestClientLoggerImpl;
+import com.pkrete.xroadtestclient.request.TestServiceRequest;
+import com.pkrete.xroadtestclient.util.ApplicationHelper;
+import com.pkrete.xroadtestclient.util.StatisticsCollector;
 import javax.xml.soap.SOAPMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -2,7 +2,7 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.pkrete.xrd4j.tools</groupId>
+    <groupId>com.pkrete</groupId>
     <artifactId>x-road-test-client</artifactId>
     <name>X-Road Test Client</name>
     <version>0.0.7-SNAPSHOT</version>
@@ -23,7 +23,7 @@
         <log4j.version>1.2.16</log4j.version>
         <xrd4j.version>0.3.0</xrd4j.version>
         <junit.version>3.8.1</junit.version>
-        <jdk.version>1.7</jdk.version>
+        <jdk.version>1.8</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
     </properties>
@@ -114,7 +114,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.pkrete.xrd4j.tools.testclient.Main</mainClass>
+                            <mainClass>com.pkrete.xroadtestclient.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

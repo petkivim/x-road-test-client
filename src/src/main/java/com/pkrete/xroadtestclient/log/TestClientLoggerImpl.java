@@ -1,4 +1,4 @@
-package com.pkrete.xrd4j.tools.testclient.log;
+package com.pkrete.xroadtestclient.log;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

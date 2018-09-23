@@ -1,4 +1,4 @@
-package com.pkrete.xrd4j.tools.testclient.request;
+package com.pkrete.xroadtestclient.request;
 
 /**
  * This class represents TestServiceRequest.

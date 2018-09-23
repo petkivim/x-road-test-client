@@ -1,4 +1,4 @@
-package com.pkrete.xrd4j.tools.testclient.util;
+package com.pkrete.xroadtestclient.util;
 
 import org.niis.xrd4j.common.util.PropertiesUtil;
 import java.io.File;

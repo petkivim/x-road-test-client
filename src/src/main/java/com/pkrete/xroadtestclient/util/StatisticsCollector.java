@@ -1,4 +1,4 @@
-package com.pkrete.xrd4j.tools.testclient.util;
+package com.pkrete.xroadtestclient.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;

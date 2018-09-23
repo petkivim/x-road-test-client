@@ -1,4 +1,4 @@
-package com.pkrete.xrd4j.tools.testclient.request;
+package com.pkrete.xroadtestclient.request;
 
 import org.niis.xrd4j.common.exception.XRd4JException;
 import org.niis.xrd4j.common.member.ConsumerMember;
@@ -6,8 +6,8 @@ import org.niis.xrd4j.common.member.ProducerMember;
 import org.niis.xrd4j.common.message.ServiceRequest;
 import org.niis.xrd4j.common.util.ConfigurationHelper;
 import org.niis.xrd4j.common.util.MessageHelper;
-import com.pkrete.xrd4j.tools.testclient.util.ApplicationHelper;
-import com.pkrete.xrd4j.tools.testclient.util.Constants;
+import com.pkrete.xroadtestclient.util.ApplicationHelper;
+import com.pkrete.xroadtestclient.util.Constants;
 import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
