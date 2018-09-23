@@ -1,19 +1,21 @@
 package com.pkrete.xroadtestclient.util;
 
 import org.niis.xrd4j.common.util.PropertiesUtil;
-import java.io.File;
-import java.util.Properties;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.util.Properties;
 
 /**
  * This class is responsiple of loading all the properties files.
  *
  * @author Petteri Kivimäki
  */
-public class PropertiesLoader {
+public final class PropertiesLoader {
 
-    private static final Logger logger = LoggerFactory.getLogger(PropertiesLoader.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PropertiesLoader.class);
     private static Properties generalSettings;
     private static Properties clientSettings;
 
@@ -31,10 +33,10 @@ public class PropertiesLoader {
      */
     public static Properties loadGeneralSettings() {
         if (generalSettings != null) {
-            logger.trace("General settings already loaded. Use cached values.");
+            LOG.trace("General settings already loaded. Use cached values.");
             return generalSettings;
         }
-        logger.debug("Load general settings.");
+        LOG.debug("Load general settings.");
         generalSettings = PropertiesLoader.load(Constants.GENERAL_SETTINGS_FILE);
         return generalSettings;
     }
@@ -46,10 +48,10 @@ public class PropertiesLoader {
      */
     public static Properties loadClientSettings() {
         if (clientSettings != null) {
-            logger.trace("Client settings already loaded. Use cached values.");
+            LOG.trace("Client settings already loaded. Use cached values.");
             return clientSettings;
         }
-        logger.debug("Load client settings.");
+        LOG.debug("Load client settings.");
         clientSettings = PropertiesLoader.load(Constants.CLIENT_SETTINGS_FILE);
         return clientSettings;
     }
@@ -63,20 +65,20 @@ public class PropertiesLoader {
      * @return properties loaded from the file
      */
     private static Properties load(String fileName) {
-        logger.debug("Load settings.");
+        LOG.debug("Load settings.");
         Properties settings;
         String path = ApplicationHelper.getJarPath() + fileName;
         if (new File(path).exists()) {
             settings = PropertiesUtil.getInstance().load(path, false);
             if (settings != null) {
-                logger.debug("Settings loaded from file \"{}\".", path);
+                LOG.debug("Settings loaded from file \"{}\".", path);
                 return settings;
             }
         }
-        logger.debug("No external settings file was found from path \"{}\".", path);
+        LOG.debug("No external settings file was found from path \"{}\".", path);
         path = "/" + fileName;
         settings = PropertiesUtil.getInstance().load(path);
-        logger.debug("Settings loaded from file \"{}\".", path);
+        LOG.debug("Settings loaded from file \"{}\".", path);
         return settings;
     }
 }

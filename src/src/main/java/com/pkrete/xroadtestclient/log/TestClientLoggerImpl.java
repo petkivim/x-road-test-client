@@ -11,20 +11,21 @@ import org.slf4j.LoggerFactory;
  */
 public class TestClientLoggerImpl implements TestClientLogger {
 
-    private static final Logger logger = LoggerFactory.getLogger(TestClientLoggerImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TestClientLoggerImpl.class);
 
     /**
      * Write the given information into a log.
-     * @param threadId id of the thread that processed the message
-     * @param msgId unique id of the message
-     * @param throughput message throughput in milliseconds
+     *
+     * @param threadId              id of the thread that processed the message
+     * @param msgId                 unique id of the message
+     * @param throughput            message throughput in milliseconds
      * @param serviceProcessingTime time that the service used for generating the response data in milliseconds
-     * @param successSend true if the message was sent successfully; otherwise
-     * false
-     * @param successReceive true if the response was received successfully;
-     * otherwise false
+     * @param successSend           true if the message was sent successfully; otherwise
+     *                              false
+     * @param successReceive        true if the response was received successfully;
+     *                              otherwise false
      */
     public void log(int threadId, String msgId, long throughput, String serviceProcessingTime, boolean successSend, boolean successReceive) {
-        logger.info("{}\t{}\t{}\t{}\t{}\t{}", threadId, msgId, throughput, serviceProcessingTime, successSend, successReceive);
+        LOG.info("{}\t{}\t{}\t{}\t{}\t{}", threadId, msgId, throughput, serviceProcessingTime, successSend, successReceive);
     }
 }

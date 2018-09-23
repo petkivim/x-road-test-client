@@ -28,9 +28,9 @@ public class TestServiceRequest {
      * Constructs and initializes a new TestServiceRequest with the given
      * values.
      *
-     * @param requestPayload request payload as a String
-     * @param requestAttachment request attachment as a String
-     * @param responseBodySize response body character count
+     * @param requestPayload         request payload as a String
+     * @param requestAttachment      request attachment as a String
+     * @param responseBodySize       response body character count
      * @param responseAttachmentSize response attachment character count
      */
     public TestServiceRequest(String requestPayload, String requestAttachment, String responseBodySize, String responseAttachmentSize) {

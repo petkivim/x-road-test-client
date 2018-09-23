@@ -2,7 +2,9 @@ package com.pkrete.xroadtestclient.serializer;
 
 import org.niis.xrd4j.client.serializer.AbstractServiceRequestSerializer;
 import org.niis.xrd4j.common.message.ServiceRequest;
+
 import com.pkrete.xroadtestclient.request.TestServiceRequest;
+
 import javax.xml.soap.AttachmentPart;
 import javax.xml.soap.SOAPElement;
 import javax.xml.soap.SOAPEnvelope;

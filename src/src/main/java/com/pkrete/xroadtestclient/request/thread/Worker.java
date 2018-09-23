@@ -7,23 +7,24 @@ import org.niis.xrd4j.client.serializer.ServiceRequestSerializer;
 import org.niis.xrd4j.common.message.ServiceRequest;
 import org.niis.xrd4j.common.message.ServiceResponse;
 import org.niis.xrd4j.common.util.MessageHelper;
+
 import com.pkrete.xroadtestclient.deserializer.TestServiceResponseDeserializer;
 import com.pkrete.xroadtestclient.log.TestClientLogger;
 import com.pkrete.xroadtestclient.log.TestClientLoggerImpl;
 import com.pkrete.xroadtestclient.request.TestServiceRequest;
 import com.pkrete.xroadtestclient.util.ApplicationHelper;
 import com.pkrete.xroadtestclient.util.StatisticsCollector;
-import javax.xml.soap.SOAPMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.soap.SOAPMessage;
+
 /**
- *
  * @author Petteri Kivimäki
  */
 public class Worker implements Runnable {
 
-    private static final Logger logger = LoggerFactory.getLogger(Runnable.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Runnable.class);
     private final ServiceRequest message;
     private final String url;
     private final int sleep;
@@ -33,6 +34,16 @@ public class Worker implements Runnable {
     private final ServiceRequestSerializer serializer;
     private final TestClientLogger resulstLogger;
 
+    /**
+     * Constructs and initializes a new Worker object.
+     * @param message ServiceRequest to be sent
+     * @param url target URL
+     * @param sleep how many ms the Worker should sleep between two requests
+     * @param maxRequestCount maximum number of requests to be sent
+     * @param maxTime maximum time for this Worker to run
+     * @param number number identifying this Worker
+     * @param serializer ServiceRequestSerializer that is knows how to serialize the message
+     */
     public Worker(ServiceRequest message, String url, int sleep, int maxRequestCount, int maxTime, int number, ServiceRequestSerializer serializer) {
         this.message = message;
         this.url = url;
@@ -46,7 +57,7 @@ public class Worker implements Runnable {
 
     @Override
     public void run() {
-        logger.debug("Thread #{} starting.", this.number);
+        LOG.debug("Thread #{} starting.", this.number);
         // Init variables for counting requests and time
         int requestCount = 0;
         long timeCount = 0;
@@ -65,7 +76,7 @@ public class Worker implements Runnable {
                 message.setId(reqId);
                 // Serialize message to SOAP
                 SOAPMessage request = this.serializer.serialize(message);
-                logger.debug("Thread #{} sending message #{}, ID : \"{}\".", this.number, requestCount, reqId);
+                LOG.debug("Thread #{} sending message #{}, ID : \"{}\".", this.number, requestCount, reqId);
                 long msgStartTime = System.currentTimeMillis();
                 // Create new client for sending the message
                 SOAPClient client = new SOAPClientImpl();
@@ -80,22 +91,22 @@ public class Worker implements Runnable {
                 // Check SOAP response for SOAP Fault
                 if (serviceResponse.hasError()) {
                     receiveSuccess = false;
-                    logger.error("Thread #{} received response containing SOAP Fault for message #{}, ID : \"{}\".", this.number, requestCount, reqId);
-                    logger.error("Fault code : \"{}\".", serviceResponse.getErrorMessage().getFaultCode());
+                    LOG.error("Thread #{} received response containing SOAP Fault for message #{}, ID : \"{}\".", this.number, requestCount, reqId);
+                    LOG.error("Fault code : \"{}\".", serviceResponse.getErrorMessage().getFaultCode());
                 } else {
                     serviceProcessingTime = serviceResponse.getResponseData();
-                    logger.debug("Thread #{} received response for message #{}, ID : \"{}\".", this.number, requestCount, reqId);
+                    LOG.debug("Thread #{} received response for message #{}, ID : \"{}\".", this.number, requestCount, reqId);
                 }
-                logger.info("Message \"{}\" processing time {} ms", reqId, throughput);
+                LOG.info("Message \"{}\" processing time {} ms", reqId, throughput);
                 // Sleep...
                 if (this.sleep > 0) {
-                    logger.debug("Thread #{} sleeping {} ms.", this.number, this.sleep);
+                    LOG.debug("Thread #{} sleeping {} ms.", this.number, this.sleep);
                     Thread.sleep(this.sleep);
                 }
             } catch (Exception ex) {
                 receiveSuccess = false;
-                logger.error("Thread #{} sending message #{} failed, ID : \"{}\".", this.number, requestCount, reqId);
-                logger.error(ex.getMessage(), ex);
+                LOG.error("Thread #{} sending message #{} failed, ID : \"{}\".", this.number, requestCount, reqId);
+                LOG.error(ex.getMessage(), ex);
             }
             this.resulstLogger.log(this.number, reqId, throughput, serviceProcessingTime, sendSuccess, receiveSuccess);
             // Incerease time count
@@ -113,6 +124,6 @@ public class Worker implements Runnable {
             // Update request counter
             requestCount++;
         }
-        logger.debug("Thread #{} done!", this.number);
+        LOG.debug("Thread #{} done!", this.number);
     }
 }

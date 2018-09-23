@@ -1,23 +1,28 @@
 package com.pkrete.xroadtestclient.util;
 
 import org.niis.xrd4j.common.exception.XRd4JException;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.niis.xrd4j.common.message.ServiceRequest;
+
 import com.pkrete.xroadtestclient.request.TestServiceRequest;
-import java.io.File;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.log4j.xml.DOMConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.apache.log4j.xml.DOMConfigurator;
+
+import java.io.File;
 
 /**
  * This class offers helper methods for the application.
  *
  * @author Petteri Kivimäki
  */
-public class ApplicationHelper {
+public final class ApplicationHelper {
 
-    private static final Logger logger = LoggerFactory.getLogger(ApplicationHelper.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ApplicationHelper.class);
     private static String jarDir;
+    private static final int OS_NAME_LENGTH = 3;
+    private static final int LINUX_LIMIT = 5;
+    private static final int WIN_LIMIT = 6;
 
     /**
      * Constructs and initializes a new ApplicationHelper object. Should never
@@ -34,14 +39,14 @@ public class ApplicationHelper {
      * @return absolute path of the current working directory
      */
     public static String getJarPath() {
-        logger.debug("Load jar directory.");
+        LOG.debug("Load jar directory.");
         if (jarDir != null && !jarDir.isEmpty()) {
-            logger.debug("Jar directory already loaded! Use cached value : \"{}\".", jarDir);
+            LOG.debug("Jar directory already loaded! Use cached value : \"{}\".", jarDir);
             return jarDir;
         }
-        int limit = 5;
-        if ("Win".equals(System.getProperty("os.name").substring(0, 3))) {
-            limit = 6;
+        int limit = LINUX_LIMIT;
+        if ("Win".equals(System.getProperty("os.name").substring(0, OS_NAME_LENGTH))) {
+            limit = WIN_LIMIT;
         }
         String temp = ApplicationHelper.class.getProtectionDomain().getCodeSource().getLocation().toString().substring(limit);
         String[] arr = temp.split("/");
@@ -49,10 +54,10 @@ public class ApplicationHelper {
         try {
             jarDir = temp.replace(arr[arr.length - 1], "");
             jarDir = jarDir.replaceAll("/+$", "/");
-            logger.info("Jar directory loaded : \"{}\".", jarDir);
+            LOG.info("Jar directory loaded : \"{}\".", jarDir);
             return jarDir;
         } catch (Exception ex) {
-            logger.error(ex.getMessage(), ex);
+            LOG.error(ex.getMessage(), ex);
             return null;
         }
     }
@@ -61,18 +66,18 @@ public class ApplicationHelper {
      * Loads Log4j configuration.
      */
     public static void configureLog4j() {
-        logger.debug("Configure Log4J.");
+        LOG.debug("Configure Log4J.");
         String path = ApplicationHelper.getJarPath();
         String filePath = path + Constants.LOG4J_SETTINGS_FILE;
         File logConf = new File(filePath);
         if (logConf.exists()) {
             DOMConfigurator.configure(logConf.getAbsolutePath());
-            logger.debug("Logging configuration loaded from " + logConf.getAbsolutePath());
+            LOG.debug("Logging configuration loaded from " + logConf.getAbsolutePath());
         } else {
             DOMConfigurator.configure(ApplicationHelper.class.getClassLoader().getResource(Constants.LOG4J_SETTINGS_FILE));
-            logger.warn("Couldn't find " + logConf.getAbsolutePath() + " configuration file. Use default configuration.");
+            LOG.warn("Couldn't find " + logConf.getAbsolutePath() + " configuration file. Use default configuration.");
         }
-        logger.debug("Loaded Log4J.");
+        LOG.debug("Loaded Log4J.");
     }
 
     /**
@@ -82,9 +87,9 @@ public class ApplicationHelper {
      * @return random string
      */
     public static String getRandomString(int length) {
-        logger.debug("Generate random string of {} charaters.", length);
+        LOG.debug("Generate random string of {} charaters.", length);
         String s = RandomStringUtils.randomAlphanumeric(length);
-        logger.debug("String generated");
+        LOG.debug("String generated");
         return s;
     }
 
@@ -105,7 +110,7 @@ public class ApplicationHelper {
             // Return new request
             return newRequest;
         } catch (XRd4JException ex) {
-            logger.error(ex.getMessage(), ex);
+            LOG.error(ex.getMessage(), ex);
         }
         return null;
     }

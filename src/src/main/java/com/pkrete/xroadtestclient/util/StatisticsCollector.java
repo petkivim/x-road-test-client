@@ -12,24 +12,12 @@ import java.util.concurrent.LinkedBlockingQueue;
  *
  * @author Petteri Kivimäki
  */
-public class StatisticsCollector {
+public final class StatisticsCollector {
 
     /**
-     * Variable for the fastest request throughput.
+     * Reference to the singleton object.
      */
-    private long minThroughput;
-    /**
-     * Variable for the slowest request throughput.
-     */
-    private long maxThroughput;
-    /**
-     * Variable that counts the number of successful requests.
-     */
-    private int successCount;
-    /**
-     * Variable that counts the number of failed requests.
-     */
-    private int failureCount;
+    private static StatisticsCollector ref;
     /**
      * Variable for the throughput time of all the requests.
      */
@@ -51,9 +39,21 @@ public class StatisticsCollector {
      */
     private final Object failureLock = new Object();
     /**
-     * Reference to the singleton object.
+     * Variable for the fastest request throughput.
      */
-    private static StatisticsCollector ref;
+    private long minThroughput;
+    /**
+     * Variable for the slowest request throughput.
+     */
+    private long maxThroughput;
+    /**
+     * Variable that counts the number of successful requests.
+     */
+    private int successCount;
+    /**
+     * Variable that counts the number of failed requests.
+     */
+    private int failureCount;
 
     /**
      * Constructs and initializes a new StatisticsCollector.
@@ -185,7 +185,6 @@ public class StatisticsCollector {
 
     /**
      * Increases the number of successful queries by one.
-     *
      */
     public void increseSuccessCount() {
         synchronized (successLock) {
@@ -204,7 +203,6 @@ public class StatisticsCollector {
 
     /**
      * Increases the number of failed queries by one.
-     *
      */
     public void increaseFailureCount() {
         synchronized (failureLock) {

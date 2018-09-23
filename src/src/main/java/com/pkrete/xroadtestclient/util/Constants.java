@@ -5,7 +5,7 @@ package com.pkrete.xroadtestclient.util;
  *
  * @author Petteri Kivimäki
  */
-public class Constants {
+public final class Constants {
 
     public static final String GENERAL_SETTINGS_FILE = "settings.properties";
     public static final String CLIENT_SETTINGS_FILE = "clients.properties";
