@@ -54,3 +54,5 @@ $RECYCLE.BIN/
 
 # Target dir
 src/target/
+
+.idea/
