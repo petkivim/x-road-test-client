@@ -1,7 +1,5 @@
 ## Building the Code
 
-### Building the code
-
 Test Client uses Maven as the build management tool. In order to build the whole project and generate the jar file (test-client-x.x.x-SNAPSHOT.jar), you must run the maven command below from the ```src``` directory.
 
 ```
