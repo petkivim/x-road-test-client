@@ -92,14 +92,12 @@ public final class StatisticsCollector {
     /**
      * Sets the smallest throughput value.
      *
-     * @param minThroughput new value
+     * @param newMinThroughput new value
      */
-    public void setMinThroughput(long minThroughput) {
+    public void setMinThroughput(long newMinThroughput) {
         synchronized (minLock) {
-            if (this.minThroughput == 0) {
-                this.minThroughput = minThroughput;
-            } else if (minThroughput < this.minThroughput) {
-                this.minThroughput = minThroughput;
+            if (this.minThroughput == 0 || newMinThroughput < this.minThroughput) {
+                this.minThroughput = newMinThroughput;
             }
         }
     }
@@ -118,14 +116,12 @@ public final class StatisticsCollector {
     /**
      * Sets the biggest throughput value.
      *
-     * @param maxThroughput new value
+     * @param newMaxThroughput new value
      */
-    public void setMaxThroughput(long maxThroughput) {
+    public void setMaxThroughput(long newMaxThroughput) {
         synchronized (maxLock) {
-            if (this.maxThroughput == 0) {
-                this.maxThroughput = maxThroughput;
-            } else if (maxThroughput > this.maxThroughput) {
-                this.maxThroughput = maxThroughput;
+            if (this.maxThroughput == 0 || newMaxThroughput > this.maxThroughput) {
+                this.maxThroughput = newMaxThroughput;
             }
         }
     }

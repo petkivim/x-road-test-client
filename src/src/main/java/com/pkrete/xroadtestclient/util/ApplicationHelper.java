@@ -72,10 +72,10 @@ public final class ApplicationHelper {
         File logConf = new File(filePath);
         if (logConf.exists()) {
             DOMConfigurator.configure(logConf.getAbsolutePath());
-            LOG.debug("Logging configuration loaded from " + logConf.getAbsolutePath());
+            LOG.debug("Logging configuration loaded from {}", logConf.getAbsolutePath());
         } else {
             DOMConfigurator.configure(ApplicationHelper.class.getClassLoader().getResource(Constants.LOG4J_SETTINGS_FILE));
-            LOG.warn("Couldn't find " + logConf.getAbsolutePath() + " configuration file. Use default configuration.");
+            LOG.warn("Couldn't find {} configuration file. Use default configuration.", logConf.getAbsolutePath());
         }
         LOG.debug("Loaded Log4J.");
     }

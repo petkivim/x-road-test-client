@@ -49,7 +49,7 @@ public final class RequestFactory {
             LOG.error("Invalid client configuration! Invalid value : \"{}\".", clientStr);
             return null;
         }
-        LOG.debug("Client : \"{}\".", consumer.toString());
+        LOG.debug("Client : \"{}\".", consumer);
 
         // Create service
         ProducerMember producer = ConfigurationHelper.parseProducerMember(serviceStr);
@@ -57,7 +57,7 @@ public final class RequestFactory {
             LOG.error("Invalid client configuration! Invalid value : \"{}\".", serviceStr);
             return null;
         }
-        LOG.debug("Service : \"{}\".", producer.toString());
+        LOG.debug("Service : \"{}\".", producer);
 
         try {
             LOG.debug("Configure client.");

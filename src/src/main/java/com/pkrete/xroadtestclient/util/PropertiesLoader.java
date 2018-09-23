@@ -16,6 +16,7 @@ import java.util.Properties;
 public final class PropertiesLoader {
 
     private static final Logger LOG = LoggerFactory.getLogger(PropertiesLoader.class);
+    private static final String DELIMITER = "/";
     private static Properties generalSettings;
     private static Properties clientSettings;
 
@@ -76,7 +77,7 @@ public final class PropertiesLoader {
             }
         }
         LOG.debug("No external settings file was found from path \"{}\".", path);
-        path = "/" + fileName;
+        path = DELIMITER + fileName;
         settings = PropertiesUtil.getInstance().load(path);
         LOG.debug("Settings loaded from file \"{}\".", path);
         return settings;
