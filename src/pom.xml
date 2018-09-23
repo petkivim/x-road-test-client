@@ -136,6 +136,27 @@
                     <createDependencyReducedPom>false</createDependencyReducedPom>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>3.2.1</version>
+                <configuration>
+                    <cveValidForHours>24</cveValidForHours>
+                    <skip>false</skip>
+                    <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+                    <enableExperimental>false</enableExperimental>
+                    <suppressionFiles>
+                        <suppressionFile>dependency-check-suppressions.xml</suppressionFile>
+                    </suppressionFiles>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
         <defaultGoal>package</defaultGoal>
         <resources>
