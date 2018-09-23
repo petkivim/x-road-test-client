@@ -1,11 +1,11 @@
 package com.pkrete.xrd4j.tools.testclient.request;
 
-import com.pkrete.xrd4j.common.exception.XRd4JException;
-import com.pkrete.xrd4j.common.member.ConsumerMember;
-import com.pkrete.xrd4j.common.member.ProducerMember;
-import com.pkrete.xrd4j.common.message.ServiceRequest;
-import com.pkrete.xrd4j.common.util.ConfigurationHelper;
-import com.pkrete.xrd4j.common.util.MessageHelper;
+import org.niis.xrd4j.common.exception.XRd4JException;
+import org.niis.xrd4j.common.member.ConsumerMember;
+import org.niis.xrd4j.common.member.ProducerMember;
+import org.niis.xrd4j.common.message.ServiceRequest;
+import org.niis.xrd4j.common.util.ConfigurationHelper;
+import org.niis.xrd4j.common.util.MessageHelper;
 import com.pkrete.xrd4j.tools.testclient.util.ApplicationHelper;
 import com.pkrete.xrd4j.tools.testclient.util.Constants;
 import java.util.Properties;

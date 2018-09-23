@@ -1,12 +1,12 @@
 package com.pkrete.xrd4j.tools.testclient.request.thread;
 
-import com.pkrete.xrd4j.client.SOAPClient;
-import com.pkrete.xrd4j.client.SOAPClientImpl;
-import com.pkrete.xrd4j.client.deserializer.ServiceResponseDeserializer;
-import com.pkrete.xrd4j.client.serializer.ServiceRequestSerializer;
-import com.pkrete.xrd4j.common.message.ServiceRequest;
-import com.pkrete.xrd4j.common.message.ServiceResponse;
-import com.pkrete.xrd4j.common.util.MessageHelper;
+import org.niis.xrd4j.client.SOAPClient;
+import org.niis.xrd4j.client.SOAPClientImpl;
+import org.niis.xrd4j.client.deserializer.ServiceResponseDeserializer;
+import org.niis.xrd4j.client.serializer.ServiceRequestSerializer;
+import org.niis.xrd4j.common.message.ServiceRequest;
+import org.niis.xrd4j.common.message.ServiceResponse;
+import org.niis.xrd4j.common.util.MessageHelper;
 import com.pkrete.xrd4j.tools.testclient.deserializer.TestServiceResponseDeserializer;
 import com.pkrete.xrd4j.tools.testclient.log.TestClientLogger;
 import com.pkrete.xrd4j.tools.testclient.log.TestClientLoggerImpl;

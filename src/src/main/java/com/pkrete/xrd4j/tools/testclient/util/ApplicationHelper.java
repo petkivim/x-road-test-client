@@ -1,8 +1,8 @@
 package com.pkrete.xrd4j.tools.testclient.util;
 
-import com.pkrete.xrd4j.common.exception.XRd4JException;
+import org.niis.xrd4j.common.exception.XRd4JException;
 import org.apache.commons.lang3.RandomStringUtils;
-import com.pkrete.xrd4j.common.message.ServiceRequest;
+import org.niis.xrd4j.common.message.ServiceRequest;
 import com.pkrete.xrd4j.tools.testclient.request.TestServiceRequest;
 import java.io.File;
 import org.slf4j.Logger;

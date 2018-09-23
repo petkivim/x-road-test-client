@@ -1,6 +1,6 @@
 package com.pkrete.xrd4j.tools.testclient.util;
 
-import com.pkrete.xrd4j.common.util.PropertiesUtil;
+import org.niis.xrd4j.common.util.PropertiesUtil;
 import java.io.File;
 import java.util.Properties;
 import org.slf4j.Logger;

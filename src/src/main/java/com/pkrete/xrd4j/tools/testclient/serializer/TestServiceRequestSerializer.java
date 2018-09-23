@@ -1,7 +1,7 @@
 package com.pkrete.xrd4j.tools.testclient.serializer;
 
-import com.pkrete.xrd4j.client.serializer.AbstractServiceRequestSerializer;
-import com.pkrete.xrd4j.common.message.ServiceRequest;
+import org.niis.xrd4j.client.serializer.AbstractServiceRequestSerializer;
+import org.niis.xrd4j.common.message.ServiceRequest;
 import com.pkrete.xrd4j.tools.testclient.request.TestServiceRequest;
 import javax.xml.soap.AttachmentPart;
 import javax.xml.soap.SOAPElement;
