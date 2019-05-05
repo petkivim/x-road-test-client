@@ -20,7 +20,7 @@ https://github.com/nordic-institute/X-Road-test-service#installation
 
 ### Try It Out
 
-If you already have access to [X-Road Test Service](https://github.com/nordic-institute/X-Road-test-service)'s ```testService``` service the fastest and easiest way to try out the application is to [download](https://github.com/petkivim/x-road-test-client/releases/download/v0.0.6/x-road-test-client-0.0.6.jar) the executable jar version (```x-road-test-client-0.0.6.jar```), copy ```settings.properties``` and ```clients.properties``` configuration files in the same directory with the jar file, modify the default configuration (Security Server or X-Road Test Service URL/IP: ```settings.properties``` => ```proxy.url```) and finally run the jar: ```java -jar x-road-test-client-0.0.6.jar```.
+If you already have access to [X-Road Test Service](https://github.com/nordic-institute/X-Road-test-service)'s ```testService``` service the fastest and easiest way to try out the application is to [download](https://github.com/petkivim/x-road-test-client/releases/download/v0.0.7/x-road-test-client-0.0.7.jar) the executable jar version (```x-road-test-client-0.0.7.jar```), copy ```settings.properties``` and ```clients.properties``` configuration files in the same directory with the jar file, modify the default configuration (Security Server or X-Road Test Service URL/IP: ```settings.properties``` => ```proxy.url```) and finally run the jar: ```java -jar x-road-test-client-0.0.7.jar```.
 
 ### Configuration
 
