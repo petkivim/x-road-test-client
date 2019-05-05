@@ -5,7 +5,7 @@
     <groupId>com.pkrete</groupId>
     <artifactId>x-road-test-client</artifactId>
     <name>X-Road Test Client</name>
-    <version>0.0.7</version>
+    <version>0.0.8-SNAPSHOT</version>
     <inceptionYear>2015</inceptionYear>
     <description>       
         X-Road Test Client is a testing tool and load generator for X-Road v6.4 
