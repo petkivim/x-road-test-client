@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.8-SNAPSHOT - 2022-01-06
+- Update XRd4J version to 0.4.0
+- Update dependencies
+
 ## 0.0.7 - 2019-05-05
 - Release version 0.0.7
 - Update `org.owasp.dependency-check-maven` plugin version to `4.0.2`
