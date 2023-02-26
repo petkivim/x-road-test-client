@@ -19,8 +19,7 @@
         unique message ID is automatically generated for each request.
     </description>	
     <properties>
-        <slf4j.version>1.7.30</slf4j.version>
-        <log4j.version>2.17.1</log4j.version>
+        <slf4j.version>2.0.6</slf4j.version>
         <xrd4j.version>0.4.0</xrd4j.version>
         <junit.version>3.8.1</junit.version>
         <jdk.version>1.8</jdk.version>
@@ -39,6 +38,19 @@
             <version>${xrd4j.version}</version>
         </dependency>
 
+        <!-- SOAP API for Java 11 support -->
+        <dependency>
+            <groupId>com.sun.xml.messaging.saaj</groupId>
+            <artifactId>saaj-impl</artifactId>
+            <version>1.3.28</version>
+        </dependency>
+        <!-- Required to make SOAP attachments work with JRE 11-->
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
         <!-- Logging API: SLF4J -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -49,21 +61,15 @@
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
+            <artifactId>slf4j-reload4j</artifactId>
             <version>${slf4j.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j.version}</version>
         </dependency>
 		
         <!-- commons lang for random strings -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
+            <version>3.12.0</version>
         </dependency>
         
         <dependency>
@@ -139,7 +145,7 @@
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-                <version>6.5.0</version>
+                <version>8.1.0</version>
                 <configuration>
                     <cveValidForHours>24</cveValidForHours>
                     <skip>false</skip>

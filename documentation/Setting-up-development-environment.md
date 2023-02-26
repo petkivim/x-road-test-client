@@ -4,9 +4,8 @@ This document describes how a developer's workstation can be setup.
 
 ### Software Requirements
 
-* Linux or Windows
-* Java 7
-* Tomcat 6 or 7 or 8
+* Linux / Windows / MacOS
+* Java 8 or Java 11
 * Maven 3.x
 
 ### Getting the code
@@ -37,7 +36,7 @@ src/target/test-client-x.x.x-SNAPSHOT.jar
 If running ```mvn clean install``` generates the error presented below, there are two possible solutions.
 
 ```
-[ERROR] Failed to execute goal on project test-client: Could not resolve dependencies for project com.pkrete.xrd4j.tools:test-client:jar:0.0.1-SNAPSHOT: Failed to collect dependencies at org.niis.xrd4j:common:jar:0.3.0: Failed to read artifact descriptor for org.niis.xrd4j:common:jar:0.3.0: Could not transfer artifact org.niis.xrd4j:common:pom:0.3.0 from/to niis-repo (https://artifactory.niis.org/): sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target -> [Help 1]
+[ERROR] Failed to execute goal on project test-client: Could not resolve dependencies for project com.pkrete.xrd4j.tools:test-client:jar:0.0.1-SNAPSHOT: Failed to collect dependencies at org.niis.xrd4j:common:jar:0.3.0: Failed to read artifact descriptor for org.niis.xrd4j:common:jar:0.4.0: Could not transfer artifact org.niis.xrd4j:common:pom:0.4.0 from/to niis-repo (https://artifactory.niis.org/): sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target -> [Help 1]
 ```
 
 ##### Solution 1
@@ -51,13 +50,3 @@ mvn install -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall
 ##### Solution 2
 
 Import NIIS's Maven repository's certificate as a trusted certificate into ```cacerts``` keystore. See full [instructions](Import-a-certificate-as-a-trusted-certificate.md). NIIS's Maven release repository's URL is ```https://artifactory.niis.org/xroad-maven-releases```.
-
-### IDE Setup
-
-The project can be imported into different IDEs, but currently this section covers only Netbeans. However, some modifications are required regardless of the IDE that's being used.
-
-#### Netbeans
-
-Opening the project in Netbeans.
-
-* File -> Open Project -> path of the src folder -> Click Open Project button

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.8-SNAPSHOT - 2023-02-26
+- Add support for Java 11
+- Update dependencies
+
 ## 0.0.8-SNAPSHOT - 2022-01-06
 - Update XRd4J version to 0.4.0
 - Update dependencies

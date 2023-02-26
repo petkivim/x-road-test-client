@@ -16,7 +16,7 @@ src/target/test-client-x.x.x-SNAPSHOT.jar
 If running ```mvn clean install``` generates the error presented below, there are two possible solutions.
 
 ```
-[ERROR] Failed to execute goal on project test-client: Could not resolve dependencies for project com.pkrete.xrd4j.tools:test-client:jar:0.0.1-SNAPSHOT: Failed to collect dependencies at org.niis.xrd4j:common:jar:0.3.0: Failed to read artifact descriptor for org.niis.xrd4j:common:jar:0.3.0: Could not transfer artifact org.niis.xrd4j:common:pom:0.3.0 from/to niis-repo (https://artifactory.niis.org/): sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target -> [Help 1]
+[ERROR] Failed to execute goal on project test-client: Could not resolve dependencies for project com.pkrete.xrd4j.tools:test-client:jar:0.0.1-SNAPSHOT: Failed to collect dependencies at org.niis.xrd4j:common:jar:0.4.0: Failed to read artifact descriptor for org.niis.xrd4j:common:jar:0.4.0: Could not transfer artifact org.niis.xrd4j:common:pom:0.4.0 from/to niis-repo (https://artifactory.niis.org/): sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target -> [Help 1]
 ```
 
 ##### Solution 1
