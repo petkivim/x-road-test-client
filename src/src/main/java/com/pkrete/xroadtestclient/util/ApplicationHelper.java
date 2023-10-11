@@ -67,10 +67,10 @@ public final class ApplicationHelper {
      */
     public static void configureLog4j() {
         LOG.debug("Configure Log4J.");
-        String path = ApplicationHelper.getJarPath();
-        String filePath = path + Constants.LOG4J_SETTINGS_FILE;
+        String dir = System.getProperty(Constants.PROPERTIES_DIR_PARAM_NAME);
+        String filePath = dir + "/" + Constants.LOG4J_SETTINGS_FILE;
         File logConf = new File(filePath);
-        if (logConf.exists()) {
+        if (dir != null && logConf.exists()) {
             DOMConfigurator.configure(logConf.getAbsolutePath());
             LOG.debug("Logging configuration loaded from {}", logConf.getAbsolutePath());
         } else {

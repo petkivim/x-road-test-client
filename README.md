@@ -1,8 +1,19 @@
 # X-Road Test Client
 
-X-Road Test Client is a testing tool and load generator for X-Road 6 and X-Road 7. The implementation is based on [XRd4J](https://github.com/nordic-institute/xrd4j) library. 
+X-Road Test Client is a testing tool and load generator for X-Road 6 and X-Road 7. The implementation is based on the [XRd4J](https://github.com/nordic-institute/xrd4j) library. 
 
-By default Test Client calls `testService` service of [X-Road Test Service](https://github.com/nordic-institute/X-Road-test-service) project according to given parameters that include: message body size, message attachment size, response body size, response attachment size, number of client threads, interval between messages, number of messages to be sent per client and maximum run time per client. A random String is used as a payload and the same String is used in all the requests in a single execution. However, unique message ID is automatically generated for each request.   
+By default Test Client calls `testService` service of [X-Road Test Service](https://github.com/nordic-institute/X-Road-test-service) project according to given parameters that include: 
+
+- message body size
+- message attachment size
+- response body size
+- response attachment size
+- number of client threads
+- interval between messages
+- number of messages to be sent per client
+- maximum run time per client.
+
+A random String is used as a payload and the same String is used in all the requests in a single execution. However, unique message ID is automatically generated for each request.   
 
 ### Customization
 
@@ -18,13 +29,17 @@ https://github.com/nordic-institute/X-Road-test-service#installation
 
 ### Try It Out
 
-If you already have access to [X-Road Test Service](https://github.com/nordic-institute/X-Road-test-service)'s `testService` service, the fastest and easiest way to try out the application is to [download](https://github.com/petkivim/x-road-test-client/releases/download/v0.0.7/x-road-test-client-0.0.7.jar) the executable jar version (`x-road-test-client-0.0.7.jar`), copy `settings.properties` and `clients.properties` configuration files in the same directory with the jar file, modify the default configuration (Security Server or X-Road Test Service URL/IP: `settings.properties` => `proxy.url`) and finally run the jar: `java -jar x-road-test-client-0.0.7.jar`.
+If you already have access to [X-Road Test Service](https://github.com/nordic-institute/X-Road-test-service)'s `testService` service, the fastest and easiest way to try out the application is to [download](https://github.com/petkivim/x-road-test-client/releases/download/v0.0.8/x-road-test-client-0.0.8.jar) the executable jar version (`x-road-test-client-0.0.8.jar`), copy `settings.properties` and `clients.properties` configuration files in the same directory (specified by the system property `propertiesDirectory`), modify the default configuration (Security Server or X-Road Test Service URL/IP: `settings.properties` => `proxy.url`) and finally run the jar: 
+
+```bash
+java -jar -DpropertiesDirectory=/my/custom/path x-road-test-client-0.0.8.jar
+```
 
 ### Configuration
 
 Test Client has three configuration files: `settings.properties`, `clients.properties` and `log4j.xml`.
 
-By default Test Client uses the configuration files that are packaged inside the jar file. It's possible to override the default configuration copying one or all the configuration files (`settings.properties`, `clients.properties`, `log4j.xml`) and placing them in the same directory with the jar file. When the jar file is run it first looks for the configuration files from the working directory, and for the configuration files that can can not be found it uses the default configuration. For example, it's possible to override `settings.properties` and `clients.properties` placing modified versions in the same directory with the jar file, but use the default configuration for logging.
+By default, Test Client uses the configuration files that are packaged inside the jar file. It's possible to override the default configuration copying one or all the configuration files (`settings.properties`, `clients.properties`, `log4j.xml`) and placing them in the same directory that's specified using the system property `propertiesDirectory`. When the jar file is run, it first looks for the configuration files from the `propertiesDirectory` directory, and for the configuration files that can can not be found it uses the default configuration. For example, it's possible to override `settings.properties` and `clients.properties` placing modified versions in the `propertiesDirectory` directory, but use the default configuration for logging.
 
 #### settings.properties
 
@@ -76,7 +91,7 @@ By default Test Client uses the configuration files that are packaged inside the
 
 **Example**
 
-```
+```properties
 # Security server URL/IP
 proxy.url=http://123.456.78.9/
 # Number of thread executors
@@ -130,7 +145,7 @@ thread.request.maxtime=0
 
 **Example**
 
-```
+```properties
 # Client ID: instance.memberClass.member.subsystem
 client=NIIS-TEST.GOV.123456-7.TestClient
 # Request body size (character cnt)
@@ -169,7 +184,7 @@ By default all the output generated by Test Client is printed on console. The de
 
 **Default configuration**
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
@@ -212,3 +227,35 @@ By default all the output generated by Test Client is printed on console. The de
 ### Building the code
 
 Test Client uses Maven as the build management tool. Instructions for [building the code](documentation/Building-the-code.md) with Maven and [setting up a development environment](documentation/Setting-up-development-environment.md) can be found in the documentation.
+
+### Docker
+
+You can create a Docker image to run X-Road Test Client inside a container, using the provided Dockerfile.
+Before building the image, build the jar file inside `src` directory
+
+```bash
+mvn clean install
+```
+If you have not built the jar, building the Docker image will fail with message
+```bash
+Step 2 : ADD src/target/x-road-test-client-*.jar test-client.jar
+No source files were specified
+```
+
+While you are in the project root directory, build the image using the `docker build` command. The `-t` parameter gives your image a tag, so you can run it more easily later. Don’t forget the `.` command, which tells the `docker build` command to look in the current directory for a file called Dockerfile.
+
+```bash
+docker build -t x-road-test-client .
+```
+
+After building the image, you can run X-Road Test Client:
+
+```bash
+docker run --rm x-road-test-client
+```
+
+If customized configuration files are used, the host directory containing the configuration files must be mounted as a data directory. In addition, the directory containing the configuration files inside the container must be set using `JAVA_OPTS` and `propertiesDirectory` property.
+
+```bash
+docker run --rm -v /host/dir/conf:/my/conf -e "JAVA_OPTS=-DpropertiesDirectory=/my/conf" x-road-test-client
+```
