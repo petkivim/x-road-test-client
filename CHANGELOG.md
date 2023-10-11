@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.8-SNAPSHOT - 2023-10-10
+- Add support for Docker
+- Add `propertiesDirectory` system property to define the location of custom configuration files
+
 ## 0.0.8-SNAPSHOT - 2023-02-26
 - Add support for Java 11
 - Update dependencies
