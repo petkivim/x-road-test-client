@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.0.8 - 2023-10-11
+- Release version 0.0.8
+
 ## 0.0.8-SNAPSHOT - 2023-10-10
 - Add support for Docker
 - Add `propertiesDirectory` system property to define the location of custom configuration files
