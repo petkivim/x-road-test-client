@@ -16,7 +16,6 @@ import java.util.Properties;
 public final class PropertiesLoader {
 
     private static final Logger LOG = LoggerFactory.getLogger(PropertiesLoader.class);
-    private static final String DELIMITER = "/";
     private static Properties generalSettings;
     private static Properties clientSettings;
 
@@ -58,9 +57,9 @@ public final class PropertiesLoader {
     }
 
     /**
-     * Loads properties from a file with the given filename. First the file
-     * searched from the same directory with the jar file and then from class
-     * path.
+     * Loads properties from a file with the given filename. First the file is
+     * searched from the directory defined by the "propertiesDirectory" property
+     * and then from class path.
      *
      * @param fileName name of the file to be searched
      * @return properties loaded from the file
@@ -68,8 +67,9 @@ public final class PropertiesLoader {
     private static Properties load(String fileName) {
         LOG.debug("Load settings.");
         Properties settings;
-        String path = ApplicationHelper.getJarPath() + fileName;
-        if (new File(path).exists()) {
+        String dir = System.getProperty(Constants.PROPERTIES_DIR_PARAM_NAME);
+        String path = dir + fileName;
+        if (dir != null && new File(path).exists()) {
             settings = PropertiesUtil.getInstance().load(path, false);
             if (settings != null) {
                 LOG.debug("Settings loaded from file \"{}\".", path);
@@ -77,9 +77,8 @@ public final class PropertiesLoader {
             }
         }
         LOG.debug("No external settings file was found from path \"{}\".", path);
-        path = DELIMITER + fileName;
-        settings = PropertiesUtil.getInstance().load(path);
-        LOG.debug("Settings loaded from file \"{}\".", path);
+        settings = PropertiesUtil.getInstance().load(fileName);
+        LOG.debug("Settings loaded from file \"{}\".", fileName);
         return settings;
     }
 }

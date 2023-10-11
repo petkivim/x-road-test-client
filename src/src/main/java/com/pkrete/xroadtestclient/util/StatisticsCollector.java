@@ -153,6 +153,9 @@ public final class StatisticsCollector {
      */
     public Double getMedian() {
         List<Long> sortedResults = this.getSortedResults();
+        if (sortedResults.size() == 0) {
+            return 0.0;
+        }
         int middle = sortedResults.size() / 2;
         if (sortedResults.size() % 2 == 1) {
             return (double) sortedResults.get(middle);
